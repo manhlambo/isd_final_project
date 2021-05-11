@@ -41,8 +41,12 @@ Route::delete('/users/{user}', 'UserController@destroy')->name('user.destroy');
 /**
  * route authorization
  */
-Route::middleware('role:admin')->group(function(){
+Route::middleware(['role:admin', 'auth'])->group(function(){
     Route::get('/users', 'UserController@index')->name('users.index');
+
+    Route::patch('/users/{user}/attach', 'UserController@attach')->name('user.role.attach');
+    Route::patch('/users/{user}/detach', 'UserController@detach')->name('user.role.detach');
+
 });
 
 /**

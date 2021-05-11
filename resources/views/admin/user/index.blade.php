@@ -15,7 +15,7 @@
               <div class="table-responsive">
                 <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
                   <thead>
-                    <tr>
+                    <tr>                      
                       <th>id</th>
                       <th>Name</th>
                       <th>Email</th>
@@ -38,7 +38,7 @@
                       @foreach($users as $user)
                     <tr>
                       <td>{{$user->id}}</td>
-                      <td>{{$user->name}}</td>
+                      <td><a href="{{route('user.profile.show', $user->id)}}">{{$user->name}}</a></td>
                       <td>{{$user->email}}</td>
                       <td>{{$user->created_at->diffForHumans()}}</td>
                       <td>{{$user->updated_at->diffForHumans()}}</td>
