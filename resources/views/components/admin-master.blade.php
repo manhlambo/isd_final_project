@@ -54,6 +54,10 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
+      @if(auth()->user()->userHasRole('Admin'))
+      <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
+      @endif
+
       <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
       <x-admin-sidebar-teacher-link> </x-admin-sidebar-teacher-link>
       <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>

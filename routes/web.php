@@ -29,3 +29,25 @@ Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 Route::get('posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 Route::patch('posts/{post}', 'PostController@update')->name('posts.update');
 Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
+
+/**
+ * user
+ */
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
+Route::patch('/users/{user}/update', 'UserController@update')->name('user.profile.update');
+Route::delete('/users/{user}', 'UserController@destroy')->name('user.destroy');
+
+/**
+ * route authorization
+ */
+Route::middleware('role:admin')->group(function(){
+    Route::get('/users', 'UserController@index')->name('users.index');
+});
+
+/**
+ * admin & model owner same access
+ */
+Route::middleware(['auth', 'can:view,user'])->group(function(){
+    Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
+});
