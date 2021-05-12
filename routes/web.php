@@ -55,3 +55,18 @@ Route::middleware(['role:admin', 'auth'])->group(function(){
 Route::middleware(['auth', 'can:view,user'])->group(function(){
     Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
 });
+
+
+/**
+ * Roles
+ */
+Route::get('/roles', 'RoleController@index')->name('roles.index');
+Route::post('/roles', 'RoleController@store')->name('role.store');
+Route::get('/roles/{role}/edit', 'RoleController@Edit')->name('role.edit');
+Route::patch('/roles/{role}', 'RoleController@update')->name('role.update');
+Route::delete('/roles/{role}', 'RoleController@destroy')->name('role.destroy');
+
+/**
+ * Permissions
+ */
+Route::get('/permissions', 'PermissionController@index')->name('permissions.index');

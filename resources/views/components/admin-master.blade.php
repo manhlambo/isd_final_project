@@ -57,7 +57,7 @@
       @if(auth()->user()->userHasRole('Admin'))
       <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
       @endif
-
+      <x-admin-sidebar-authorization-link> </x-admin-sidebar-authorization-link>
       <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
       <x-admin-sidebar-teacher-link> </x-admin-sidebar-teacher-link>
       <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>
@@ -90,7 +90,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <!-- <li class="nav-item active">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pages</span>
@@ -107,7 +107,7 @@
             <a class="collapse-item active" href="blank.html">Blank Page</a>
           </div>
         </div>
-      </li>
+      </li> -->
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
