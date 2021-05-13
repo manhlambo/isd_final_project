@@ -9,7 +9,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Người dùng</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -17,8 +17,8 @@
                   <thead>
                     <tr>                      
                       <th>id</th>
-                      <th>Name</th>
-                      <th>Email</th>
+                      <th>Tên</th>
+                      <th>Địa chỉ email</th>
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức Năng</th>
@@ -27,8 +27,8 @@
                   <tfoot>
                     <tr>
                       <th>id</th>
-                      <th>Name</th>
-                      <th>Email</th>
+                      <th>Tên</th>
+                      <th>Địa chỉ email</th>
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức năng</th>

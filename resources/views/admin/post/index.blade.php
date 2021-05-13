@@ -1,8 +1,6 @@
 <x-admin-master>
 @section('content')
 
-<h1>All Posts</h1>
-
 @if(Session::has('message'))
     <div class="alert alert-danger">{{Session::get('message')}}</div>
     
@@ -16,7 +14,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Thông báo</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -27,7 +25,7 @@
                       <th>Người Đăng</th>
                       <th>Tiêu đề</th>
                       <th>Nội dung</th>
-                      <th>File đính kèm</th>
+                      <!-- <th>File đính kèm</th> -->
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức Năng</th>
@@ -39,7 +37,7 @@
                       <th>Người Đăng</th>
                       <th>Tiêu đề</th>
                       <th>Nội dung</th>
-                      <th>File đính kèm</th>
+                      <!-- <th>File đính kèm</th> -->
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức năng</th>
@@ -52,7 +50,7 @@
                       <td>{{$post->user->name}}</td>
                       <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
                       <td>{{$post->content}}</td>
-                      <td>{{$post->file}}</td>
+                      <!-- <td>{{$post->file}}</td> -->
                       <td>{{$post->created_at->diffForHumans()}}</td>
                       <td>{{$post->updated_at->diffForHumans()}}</td>
                       <td>

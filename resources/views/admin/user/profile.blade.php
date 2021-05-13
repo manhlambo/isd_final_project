@@ -3,7 +3,7 @@
 
     @section('content')
 
-        <h2>User Profile for : {{$user->name}}</h2>
+        <h2>Thông tin người dùng: {{$user->name}}</h2>
 
 
        <div class="row">
@@ -15,7 +15,7 @@
                                @method('PATCH')
 
                                <div class="form-group">
-                                       <label for="name">Name</label>
+                                       <label for="name">Tên</label>
                                        <input type="text"
                                               name="name"
                                               class="form-control @error('name') is-invalid @enderror"
@@ -29,7 +29,7 @@
                                </div>
 
                                <div class="form-group">
-                                       <label for="email">Email</label>
+                                       <label for="email">Địa chỉ email</label>
                                        <input type="text"
                                               name="email"
                                               class="form-control @error('email') is-invalid @enderror"
@@ -42,33 +42,7 @@
                                        @enderror
                                </div>
 
-                                <!--  Password and confirm password -->
-                               <!-- <div class="form-group">
-                                       <label for="password">Password</label>
-                                       <input type="password"
-                                              name="password"
-                                              class="form-control @error('password') is-invalid @enderror"
-                                              id="password"
-                                       >
-
-                                       @error('password')
-                                       <div class="invalid-feedback">{{$message}}</div>
-                                       @enderror
-                               </div>
-                               <div class="form-group">
-                                       <label for="password-confirmation">Confirm Password</label>
-                                       <input type="password"
-                                              name="password_confirmation"
-                                              class="form-control @error('password_confirmation') is-invalid @enderror"
-                                              id="password-confirmation"
-                                       >
-
-                                       @error('password_confirmation')
-                                       <div class="invalid-feedback">{{$message}}</div>
-                                       @enderror
-                               </div> -->
-                               
-                               <button type="submit" class="btn btn-primary">Submit</button>
+                               <button type="submit" class="btn btn-primary">Xác nhận</button>
                        </form>
 
                </div>
@@ -80,7 +54,7 @@
         <div class="col-sm-12">
                 <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Vai trò:</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">

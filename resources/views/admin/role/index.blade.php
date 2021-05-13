@@ -1,6 +1,6 @@
 <x-admin-master>
 @section('content')
-<h2>View All Roles:</h2>
+<h2>Roles:</h2>
 
 <div class="row">
 
@@ -9,7 +9,7 @@
         <form method='post' action="{{route('role.store')}}">
             @csrf
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Tên</label>
                 <input type="text"
                        name='name'
                        id='name' 
@@ -22,11 +22,9 @@
                 </div>
             </div>  
 
-            <button class='btn btn-primary btn-block'>Create</button>      
+            <button class='btn btn-primary btn-block'>Tạo</button>      
         
         </form>
-    
-
     </div>
 
     <div class="col-sm-9">
@@ -42,7 +40,7 @@
                       <th>id</th>
                       <th>Name</th>
                       <th>Slug</th>
-                      <th>Delete</th>
+                      <th>Chức Năng</th>
                       
                     </tr>
                   </thead>
@@ -51,7 +49,7 @@
                       <th>id</th>
                       <th>Name</th>
                       <th>Slug</th>
-                      <th>Delete</th>
+                      <th>Chức Năng</th>
                     </tr>
                   </tfoot>
                   <tbody>
