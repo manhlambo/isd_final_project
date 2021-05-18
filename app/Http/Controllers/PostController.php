@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Session;
 
 
+
 class PostController extends Controller
 {
     public function index(){
@@ -67,4 +68,7 @@ class PostController extends Controller
     public function show(){
         return view('announcement');
     }
+
+    
+  
 }
