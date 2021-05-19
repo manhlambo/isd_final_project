@@ -70,3 +70,29 @@ Route::delete('/roles/{role}', 'RoleController@destroy')->name('role.destroy');
  * Permissions
  */
 Route::get('/permissions', 'PermissionController@index')->name('permissions.index');
+
+/**
+ * Teachers
+ */
+Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
+Route::get('/teachers/create', 'TeacherController@create')->name('teacher.create');
+Route::post('/teachers', 'TeacherController@store')->name('teacher.store');
+Route::get('/teachers/{teacher}/edit', 'TeacherController@edit')->name('teacher.edit');
+Route::patch('/teachers/{teacher}', 'TeacherController@update')->name('teacher.update');
+Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher.destroy');
+
+/**
+ * Students
+ */
+Route::get('/students', 'StudentController@index')->name('students.index');
+Route::get('students/create', 'StudentController@create')->name('student.create');
+
+/**
+ * Classrooms
+ */
+Route::get('/classrooms', 'ClassRoomController@index')->name('classrooms.index');
+Route::get('/classrooms/create', 'ClassRoomController@create')->name('classroom.create');
+Route::post('/classrooms', 'ClassRoomController@store')->name('classroom.store');
+Route::get('/classrooms/{classroom}/edit', 'ClassRoomController@edit')->name('classroom.edit');
+Route::patch('/classrooms/{classroom}', 'ClassRoomController@update')->name('classroom.update');
+Route::delete('/classrooms/{classroom}', 'ClassRoomController@destroy')->name('classroom.destroy');

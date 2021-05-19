@@ -58,10 +58,13 @@
       <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
       @endif
       <x-admin-sidebar-authorization-link> </x-admin-sidebar-authorization-link>
-      <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
+      
       <x-admin-sidebar-teacher-link> </x-admin-sidebar-teacher-link>
-      <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>
+      <x-admin-sidebar-classroom-link> </x-admin-sidebar-classroom-link>
       <x-admin-sidebar-student-link> </x-admin-sidebar-student-link>
+      <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>
+      <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
+      
 
 
       <!-- Divider -->
