@@ -64,8 +64,7 @@
                             <input id="teacher_id" 
                             type="tel" 
                             class="form-control @error('teacher_id') is-invalid @enderror" 
-                            name="teacher_id" value="{{ old('teacher_id') ?? $classroom->teacher->id}}"  autocomplete="teacher_id" autofocus>
-    
+                            name="teacher_id" value="{{ old('teacher_id') ?? $classroom->teacher->id ?? '' }}"  autocomplete="teacher_id" autofocus>
                                 @error('teacher_id')
                                     
                                         <strong>{{ $message }}</strong>

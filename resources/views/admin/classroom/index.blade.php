@@ -42,7 +42,7 @@
                           <td><a href="{{ route('classroom.edit', $classroom->id) }}">{{ $classroom->id}}</a></td>
                           <td>{{ $classroom->grade }}</td>
                           <td>{{ $classroom->name }}</td>
-                          <td>{{ $classroom->teacher->user->name }}</td>
+                          <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td> 
                           <td>
                             <form action="{{ route('classroom.destroy', $classroom->id) }}" method='post' enctype='multipart/form-data'>
                               @csrf

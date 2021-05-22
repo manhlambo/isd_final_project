@@ -86,6 +86,10 @@ Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher
  */
 Route::get('/students', 'StudentController@index')->name('students.index');
 Route::get('students/create', 'StudentController@create')->name('student.create');
+Route::post('students', 'StudentController@store')->name('student.store');
+Route::get('students/{student}/edit', 'StudentController@edit')->name('student.edit');
+Route::patch('students/{student}', 'StudentController@update')->name('student.update');
+Route::delete('students/{student}', 'StudentController@destroy')->name('student.destroy');
 
 /**
  * Classrooms

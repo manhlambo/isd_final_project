@@ -15,7 +15,7 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->date('dob')->nullable();
             $table->string('phone', 15)->nullable();
 

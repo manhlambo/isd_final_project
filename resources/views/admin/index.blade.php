@@ -77,11 +77,11 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Môn học</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">N/A</div>
+                            <a href="{{ route('students.index') }}">Học sinh</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $students->count() }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                        <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>

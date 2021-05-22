@@ -6,6 +6,7 @@ use App\ClassRoom;
 use Illuminate\Http\Request;
 use App\User;
 use App\Teacher;
+use App\Student;
 
 class AdminController extends Controller
 {
@@ -14,6 +15,7 @@ class AdminController extends Controller
             'users' => User::all(),
             'teachers' => Teacher::all(),
             'classrooms' => ClassRoom::all(),
+            'students' => Student::all(),
         ]);
     }
 }

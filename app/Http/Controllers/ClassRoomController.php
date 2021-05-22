@@ -12,6 +12,7 @@ class ClassRoomController extends Controller
     public function index(){
 
         $classrooms = ClassRoom::all();
+        
         return view('admin.classroom.index', [
             'classrooms' => $classrooms,
         ]);
@@ -46,7 +47,7 @@ class ClassRoomController extends Controller
         $data = request()->validate([
             'grade' => 'required',
             'name' => 'required',
-            'teacher_id' => 'required | numeric|exists:teachers,id',
+            'teacher_id' => 'nullable|numeric|exists:teachers,id',
         ]);
 
         $classroom->update($data);
