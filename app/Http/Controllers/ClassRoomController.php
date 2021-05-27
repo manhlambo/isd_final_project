@@ -26,7 +26,12 @@ class ClassRoomController extends Controller
         $data = request()->validate([
             'grade' => 'required',
             'name' => 'required',
-            'teacher_id' => 'required | numeric | exists:teachers,id',
+            'teacher_id' => 'nullable | numeric | exists:teachers,id',
+        ], [
+            'grade.required' => 'Vui lòng điền tên khối học',
+            'name.required' => 'Vui lòng điền tên lớp học',
+            'teacher_id.numeric' => 'ID giáo viên phải là số',
+            'teacher_id.exists' => 'ID giáo viên không tồn tại',  
         ]);
 
         ClassRoom::create($data);
@@ -48,6 +53,12 @@ class ClassRoomController extends Controller
             'grade' => 'required',
             'name' => 'required',
             'teacher_id' => 'nullable|numeric|exists:teachers,id',
+        ], [
+
+            'grade.required' => 'Vui lòng điền tên khối học',
+            'name.required' => 'Vui lòng điền tên lớp học',
+            'teacher_id.numeric' => 'ID giáo viên phải là số',
+            'teacher_id.exists' => 'ID giáo viên không tồn tại',
         ]);
 
         $classroom->update($data);

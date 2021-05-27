@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
+
 
 class UserController extends Controller
 {
@@ -24,8 +26,13 @@ class UserController extends Controller
     public function update(User $user){
         $data = request()->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255',],
-            // 'password' => ['string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
+        ], [
+            'name.max' => 'Họ và tên quá ký tự cho phép',
+            'name.required' => 'Vui lòng nhập tên của bạn',
+            'email.required' => 'Vui lòng nhập email của bạn',
+            'email.unique' => 'Địa chỉ email này đã tồn tại',
+            'email.email' => 'Địa chỉ email không hợp lệ',
         ]);
 
         $user->update($data);

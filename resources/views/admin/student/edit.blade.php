@@ -130,9 +130,93 @@
                 </div>
             </div>
         </form>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Môn học: {{ $student->name }}</h6>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Options</th>
+                          <th>id</th>
+                          <th>Tên môn học</th>
+                          <th>Giảng viên</th>
+                          <th>Attach</th>
+                          <th>Detach</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Options</th>
+                          <th>id</th>
+                          <th>Tên môn học</th>
+                          <th>Giảng viên</th>
+                          <th>Attach</th>
+                          <th>Detach</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        @foreach ($subjects as $subject)
+                        <tr>
+                          <td><input type="checkbox"
+                                @foreach ($student->subjects as $s_subject)
+                                    @if ($s_subject->name == $subject->name)
+                                        checked
+                                    @endif
+                                @endforeach
+                            ></td>
+                          <td>{{ $subject->id }}</td>
+                          <td>{{ $subject->name }}</td>
+                          <td>{{ $subject->assign }}</td>
+                          <td>
+                            <form action="{{ route('student.subject.attach', $student) }}" method='post'>
+                              @csrf
+                              @method('PATCH')
+                              
+                              <input type="hidden" name='subject' value='{{ $subject->id }}'>
+    
+                              <button type='submit'
+                                      class="btn btn-primary"
+                                      @if ($student->subjects->contains($subject))
+                                          disabled
+                                      @endif
+                                      >Attach</button>
+    
+                            </form>
+                          </td>
+                          <td>
+                            <form action="{{ route('student.subject.detach', $student) }}" method='post'>
+                              @csrf
+                              @method('PATCH')
+                              
+                              <input type="hidden" name='subject' value='{{ $subject->id }}'>
+    
+                              <button type='submit'
+                                      class="btn btn-danger"
+                                      @if (!$student->subjects->contains($subject))
+                                          disabled
+                                      @endif
+                                      >Detach</button>
+    
+                            </form>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>                        
+            </div>
+    </div>
+
     </div> 
-    
-    
-    
     @endsection
     </x-admin-master>

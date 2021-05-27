@@ -130,9 +130,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'required' => 'Vui lòng nhập địa chỉ email của bạn',
+            
         ],
+
+        'password' => [
+                'required' => 'Vui lòng nhật mật khẩu của bạn',
+            ]
+        
     ],
 
     /*

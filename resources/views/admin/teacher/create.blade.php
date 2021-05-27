@@ -12,7 +12,7 @@
                 <div class="row"><h1>Thêm giáo viên</h1></div>
 
                 <div class="form-group row">
-                    <label for="user_id" class="col-md-4 col-form-label">ID</label>
+                    <label for="user_id" class="col-md-4 col-form-label">ID Người dùng</label>
                         
                         <input id="user_id" 
                         type="text" 

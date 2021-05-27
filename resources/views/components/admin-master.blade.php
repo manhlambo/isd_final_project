@@ -58,22 +58,29 @@
       <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
       @endif
       <x-admin-sidebar-authorization-link> </x-admin-sidebar-authorization-link>
-      
+
+      <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
+
+
+      <hr class="sidebar-divider">
+
       <x-admin-sidebar-teacher-link> </x-admin-sidebar-teacher-link>
       <x-admin-sidebar-classroom-link> </x-admin-sidebar-classroom-link>
       <x-admin-sidebar-student-link> </x-admin-sidebar-student-link>
       <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>
-      <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
+
+      <hr class="sidebar-divider">
+      <x-admin-sidebar-mark-link> </x-admin-sidebar-mark-link>
       
 
 
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      {{-- <hr class="sidebar-divider"> --}}
 
       <!-- Heading -->
-      <div class="sidebar-heading">
+      {{-- <div class="sidebar-heading">
         Addons
-      </div>
+      </div> --}}
 
       <!-- Nav Item - Pages Collapse Menu -->
       <!-- <li class="nav-item active">
@@ -96,21 +103,21 @@
       </li> -->
 
       <!-- Nav Item - Charts -->
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
-      </li>
+      </li> --}}
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
-      </li>
+      </li> --}}
 
       <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
+      {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">

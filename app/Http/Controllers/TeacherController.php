@@ -27,13 +27,21 @@ class TeacherController extends Controller
     public function store(){
         $data = request()->validate([
 
-            /**
-             * bắt buộc, ko trùng trong bảng teacher
-             * là chữ số, tồn tại trong bảng users
-             */
-            'user_id' => 'required|unique:teachers,user_id|numeric|exists:users,id' ,
-            'dob' => 'nullable|date',
-            'phone' => 'nullable|numeric|unique:teachers,phone',
+        /**
+         * bắt buộc, ko trùng trong bảng teacher
+         * là chữ số, tồn tại trong bảng users
+         */
+        'user_id' => 'required|unique:teachers,user_id|numeric|exists:users,id' ,
+        'dob' => 'nullable|date',
+        'phone' => 'nullable|digits:10|unique:teachers,phone',
+        ], [
+            'user_id.required' => 'Vui lòng nhập ID của người dùng',
+            'user_id.exists' => 'ID không tồn tại', 
+            'user_id.unique' => 'ID không hợp lệ',
+            'user_id.numeric' => 'ID phải là chữ số',
+            
+            'phone.digits:10' => 'Số điện thoại không hợp lệ',
+            'phone.unique' => 'Số điện thoại đã tồn tại'
         ]);
 
         Teacher::create($data);
@@ -54,7 +62,10 @@ class TeacherController extends Controller
              * nullable, phải là số
              * không trùng lặp và bỏ qua số đth của teacher cần update
              */
-            'phone' => ['nullable', 'numeric', Rule::unique('teachers', 'phone')->ignore($teacher)],
+            'phone' => ['nullable', 'digits:10', Rule::unique('teachers', 'phone')->ignore($teacher)],
+        ], [
+            'phone.digits:10' => 'Số điện thoại không hợp lệ',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
         ]);
 
         $teacher->update($data);

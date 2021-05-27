@@ -16,7 +16,7 @@
                 <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>                      
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Tên</th>
                       <th>Địa chỉ email</th>
                       <th>Ngày tạo</th>
@@ -26,7 +26,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Tên</th>
                       <th>Địa chỉ email</th>
                       <th>Ngày tạo</th>
@@ -40,8 +40,8 @@
                       <td>{{$user->id}}</td>
                       <td><a href="{{route('user.profile.show', $user->id)}}">{{$user->name}}</a></td>
                       <td>{{$user->email}}</td>
-                      <td>{{$user->created_at->diffForHumans()}}</td>
-                      <td>{{$user->updated_at->diffForHumans()}}</td>
+                      <td>{{date('d-m-Y', Strtotime($user->created_at))}}</td>
+                      <td>{{date('d-m-Y', Strtotime($user->updated_at))}}</td>
                       <td>
                           <form action="{{route('user.destroy', $user->id)}}" method='post' enctype='multipart/form-data'>
                           @csrf

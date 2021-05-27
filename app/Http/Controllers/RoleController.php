@@ -6,6 +6,8 @@ use App\Permission;
 use Illuminate\Http\Request;
 use App\Role;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 
 class RoleController extends Controller
@@ -40,7 +42,7 @@ class RoleController extends Controller
     public function update(Role $role){
 
         request()->validate([
-            'name' => 'required | unique:roles,name',
+            'name' => ['required', Rule::unique('roles', 'name')->ignore($role)],
         ]);
 
         $role->name = Str::ucfirst(request('name'));
@@ -48,7 +50,7 @@ class RoleController extends Controller
 
         $role->update();
 
-        return back();
+        return redirect()->route('roles.index');
         
     }
 

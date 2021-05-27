@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use App\User;
 use Illuminate\Support\Facades\Session;
 
 
@@ -12,6 +11,7 @@ class PostController extends Controller
 {
     public function index(){
         $posts = Post::all();
+        
         return view('admin.post.index', ['posts' => $posts]);
     }
 
@@ -58,7 +58,7 @@ class PostController extends Controller
             'content.required' => 'Vui lòng điền thông tin'
         ]);
 
-        auth()->user()->posts()->update($data);
+        $post->update($data);
 
         Session::flash('post-updated-message', 'Thông báo đã được cập nhật thành công');
         return redirect()->route('posts.index');

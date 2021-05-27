@@ -20,7 +20,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>id</th>
+                          <th>ID</th>
                           <th>Khối</th>
                           <th>Tên lớp</th>
                           <th>Giáo viên chủ nhiệm</th>
@@ -29,7 +29,7 @@
                       </thead>
                       <tfoot>
                         <tr>
-                            <th>id</th>
+                            <th>ID</th>
                             <th>Khối</th>
                             <th>Tên lớp</th>
                             <th>Giáo viên chủ nhiệm</th>

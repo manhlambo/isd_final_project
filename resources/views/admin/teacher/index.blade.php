@@ -20,7 +20,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Họ và tên</th>
                       <th>Địa chỉ email</th>
                       <th>Ngày sinh</th>
@@ -30,7 +30,7 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Họ và tên</th>
                       <th>Địa chỉ email</th>
                       <th>Ngày sinh</th>
@@ -44,7 +44,7 @@
                       <td>{{ $teacher->id }}</td>
                       <td><a href="{{ route('teacher.edit', $teacher->id) }}">{{ $teacher->user->name }}</a></td>
                       <td>{{ $teacher->user->email }}</td>
-                      <td>{{ $teacher->dob }}</td>
+                      <td>{{ date('d-m-Y', Strtotime($teacher->dob)) }}</td>
                       <td>{{ $teacher->phone }}</td>
                       <td>
                         <form action="{{ route('teacher.destroy', $teacher->id) }}" method='post' enctype='multipart/form-data'>

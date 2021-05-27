@@ -3,7 +3,7 @@
 
     @section('content')
 
-        <h2>Thông tin người dùng: {{$user->name}}</h2>
+        <h2>Thông tin người dùng: {{$user->name}} - ID: {{ $user->id }}</h2>
 
 
        <div class="row">
@@ -42,7 +42,7 @@
                                        @enderror
                                </div>
 
-                               <button type="submit" class="btn btn-primary">Xác nhận</button>
+                               <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
                        </form>
 
                </div>
@@ -62,7 +62,7 @@
                   <thead>
                     <tr>
                       <th>Options</th>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Name</th>
                       <th>Slug</th>
                       <th>Attach</th>

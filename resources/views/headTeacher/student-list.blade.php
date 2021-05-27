@@ -29,7 +29,6 @@
                           <th>SĐT phụ huynh</th>
                           <th>Lớp học</th>  
                           <th>Chủ nhiệm</th>    
-                          <th>Chức năng</th>
                         </tr>
                       </thead>
                       <tfoot>
@@ -43,15 +42,14 @@
                             <th>SĐT phụ huynh</th>
                             <th>Lớp học</th>
                             <th>Chủ nhiệm</th>     
-                            <th>Chức năng</th>
                         </tr>
                       </tfoot>
                       <tbody>
                           @foreach ($students as $student)
                         <tr>
                           <td>{{ $student->id }}</td>
-                          <td><a href="{{ route('student.edit', $student->id) }}">{{ $student->name }}</a></td>
-                          <td>{{ Date('d-m-Y', Strtotime( $student->dob)) }}</td>
+                          <td><a href="{{ route('marks.list', $student) }}">{{ $student->name }}</a></td>
+                          <td>{{date('d-m-Y', Strtotime( $student->dob)) }}</td>
                           <td>{{ $student->gender }}</td>
                           <td>{{ $student->parent_name }}</td>
                           <td>{{ $student->parent_email }}</td>
@@ -60,13 +58,6 @@
                           <td>{{ isset($student->classroom) ? $student->classroom->grade.$student->classroom->name: 'N/a'}}</td>
                           {{-- <td>{{ $student->classroom->teacher->user->name}}</td> --}}
                           <td>{{ isset($student->classroom->teacher) ?  $student->classroom->teacher->user->name: 'N/a' }}</td>
-                          <td>
-                            <form action="{{ route('student.destroy', $student->id) }}" method='post' enctype='multipart/form-data'>
-                              @csrf
-                              @method('DELETE')
-                                <button type='submit' class="btn btn-danger">Xóa</button>
-                            </form>
-                          </td>
                         </tr>                         
                         @endforeach
                       </tbody>
@@ -74,6 +65,8 @@
                   </div>
                 </div>
               </div>
+
+              
     @endsection
     
     

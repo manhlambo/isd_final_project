@@ -1,4 +1,5 @@
 <x-home-master>
+  
   @section('content')
   
   @foreach($posts as $post)
@@ -16,7 +17,7 @@
             &nbsp;
             <i class="calendar" style="color: #E07C24;">- {{ $post->show_time() }} </i>
             <p class="preview-text">
-              {{$post->content}}
+              {{ Str::limit($post->content, '100', '...') }}
             </p>
             <a href="{{route('posts.show', $post->id)}}" class="btn-readmore">Read More</a>
             <!-- <img src="{{asset('homepage/images/file_10-128.png')}}" alt="excel" class="attachments" style="height: 64px; width: 64px;">  -->

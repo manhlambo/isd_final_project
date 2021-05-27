@@ -21,11 +21,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Người Đăng</th>
                       <th>Tiêu đề</th>
                       <th>Nội dung</th>
-                      <!-- <th>File đính kèm</th> -->
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức Năng</th>
@@ -33,11 +32,10 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>id</th>
+                      <th>ID</th>
                       <th>Người Đăng</th>
                       <th>Tiêu đề</th>
                       <th>Nội dung</th>
-                      <!-- <th>File đính kèm</th> -->
                       <th>Ngày tạo</th>
                       <th>Ngày sửa đổi</th>
                       <th>Chức năng</th>
@@ -49,10 +47,9 @@
                       <td>{{$post->id}}</td>
                       <td>{{$post->user->name}}</td>
                       <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
-                      <td>{{$post->content}}</td>
-                      <!-- <td>{{$post->file}}</td> -->
-                      <td>{{$post->created_at->diffForHumans()}}</td>
-                      <td>{{$post->updated_at->diffForHumans()}}</td>
+                      <td>{{Str::limit($post->content, '10', '...')}}</td>
+                      <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
+                      <td>{{date('d-m-Y', strtotime($post->updated_at))}}</td>
                       <td>
                           <form action="{{route('posts.destroy', $post->id)}}" method='post' enctype='multipart/form-data'>
                           @csrf

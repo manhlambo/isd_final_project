@@ -91,6 +91,10 @@ Route::get('students/{student}/edit', 'StudentController@edit')->name('student.e
 Route::patch('students/{student}', 'StudentController@update')->name('student.update');
 Route::delete('students/{student}', 'StudentController@destroy')->name('student.destroy');
 
+//attach & detach môn học 
+Route::patch('students/{student}/attach', 'StudentController@attach')->name('student.subject.attach');
+Route::patch('students/{student}/detach', 'StudentController@detach')->name('student.subject.detach');
+
 /**
  * Classrooms
  */
@@ -100,3 +104,26 @@ Route::post('/classrooms', 'ClassRoomController@store')->name('classroom.store')
 Route::get('/classrooms/{classroom}/edit', 'ClassRoomController@edit')->name('classroom.edit');
 Route::patch('/classrooms/{classroom}', 'ClassRoomController@update')->name('classroom.update');
 Route::delete('/classrooms/{classroom}', 'ClassRoomController@destroy')->name('classroom.destroy');
+
+/**
+ * Subjects
+ */
+Route::get('/subjects', 'SubjectController@index')->name('subjects.index');
+Route::post('/subjects', 'SubjectController@store')->name('subject.store');
+Route::get('/subjects/{subject}/edit', 'SubjectController@edit')->name('subject.edit');
+Route::patch('/subjects/{subject}', 'SubjectController@update')->name('subject.update');
+Route::delete('/subjects/{subject}', 'SubjectController@destroy')->name('subject.destroy');
+
+/**
+ * Marks
+ */
+Route::get('/marks/{subject}/create', 'MarkController@create')->name('mark.create');
+Route::post('/marks/{subject}', 'MarkController@store')->name('mark.store');
+Route::get('/marks/{mark}/edit', 'MarkController@edit')->name('mark.edit');
+Route::patch('/marks/{mark}', 'MarkController@update')->name('mark.update');
+
+Route::patch('marks/{mark}/compute', 'MarkController@compute')->name('mark.compute');
+
+Route::get('/studentsList', 'MarkController@studentsList')->name('students.list');
+Route::get('/marks/{student}', 'MarkController@marksList')->name('marks.list');
+

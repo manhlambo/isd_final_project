@@ -12,4 +12,12 @@ class Student extends Model
     public function classroom(){
         return $this->belongsTo(ClassRoom::class);
     }
+
+    public function subjects(){
+        return $this->belongsToMany(Subject::class);
+    }
+
+    public function marks(){
+        return $this->hasMany(Mark::class);
+    }
 }
