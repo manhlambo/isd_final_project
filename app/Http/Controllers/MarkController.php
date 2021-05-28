@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Session;
 use App\Student;
 use App\Subject;
 use App\Mark;
+use Illuminate\Support\Facades\Mail;
+
 
 class MarkController extends Controller
 {
@@ -90,4 +92,43 @@ class MarkController extends Controller
 
         return back();
     }
+
+    public function email(Student $student){
+        // dd($student);
+
+
+        return view("admin.email.create", [
+            'student' => $student,
+        ]);
+    }
+
+    public function send(Student $student, Request $req){
+
+        $data = [
+            'name' => $student->name,
+            'class' => $student->classroom->grade.$student->classroom->name,
+            'teacher' => $student->classroom->teacher->user->name,
+            'teacher_email' => $student->classroom->teacher->user->email,
+            'dob' => $student->dob,
+            'parent_name' => $student->parent_name,
+            'parent_email' => $student->parent_email,
+            'subject_name' => $student->subjects,
+            
+
+
+
+
+
+            'body' => $req->body
+        ];
+
+
+        Mail::send('admin.email.send',$data, function($message) use($student) {
+            $message->to($student->parent_email) -> subject("Thông báo kết quả học tập");
+
+        });
+        
+        return back();
+    }
+    
 }

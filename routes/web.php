@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MarkController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,6 +85,8 @@ Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher
 /**
  * Students
  */
+
+
 Route::get('/students', 'StudentController@index')->name('students.index');
 Route::get('students/create', 'StudentController@create')->name('student.create');
 Route::post('students', 'StudentController@store')->name('student.store');
@@ -127,7 +130,11 @@ Route::patch('marks/{mark}/compute', 'MarkController@compute')->name('mark.compu
 Route::get('/studentsList', 'MarkController@studentsList')->name('students.list');
 Route::get('/marks/{student}', 'MarkController@marksList')->name('marks.list');
 
+Route::get('/mark/email/{student}','MarkController@email')->name('mark.email');
+Route::post('/mark/email/{student}', 'MarkController@send')->name('mark.send');
 
-Route::get('/export-excel', 'StudentController@exportIntoExcel')->name('students.export');
-Route::get('/export-excel', 'TeacherController@exportIntoExcel')->name('teachers.export');
+
+Route::get('/export-excel/teacher', 'TeacherController@exportIntoExcel')->name('teachers.export');
+Route::get('/export-excel/student', 'StudentController@exportIntoExcel')->name('students.export');
+
 

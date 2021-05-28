@@ -52,6 +52,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Tất Cả Điểm:</h6>
                 </div>
                 <div class="card-body">
+                
                   <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
@@ -96,6 +97,8 @@
                   </div>
                 </div>
               </div>
+              <div>
+              <a href="{{route('mark.email', $student)}}">Gửi email</a></div>
     @endsection
 
     @section('scripts')

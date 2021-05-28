@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use App\Exports\TeachersExport;
 use Excel;
-
-
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class TeacherController extends Controller
 {
