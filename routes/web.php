@@ -127,3 +127,7 @@ Route::patch('marks/{mark}/compute', 'MarkController@compute')->name('mark.compu
 Route::get('/studentsList', 'MarkController@studentsList')->name('students.list');
 Route::get('/marks/{student}', 'MarkController@marksList')->name('marks.list');
 
+
+Route::get('/export-excel', 'StudentController@exportIntoExcel')->name('students.export');
+Route::get('/export-excel', 'TeacherController@exportIntoExcel')->name('teachers.export');
+

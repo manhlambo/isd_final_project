@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Teacher;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use App\Exports\TeachersExport;
+use Excel;
 
 
 
@@ -79,5 +81,9 @@ class TeacherController extends Controller
 
         Session::flash('destroy-message', 'Giáo viên đã được xóa thành công');
         return back();
+    }
+
+    public function exportIntoExcel() {
+        return Excel::download(new TeachersExport, "teachers.xlsx"); 
     }
 }

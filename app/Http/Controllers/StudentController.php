@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Subject;
 use Illuminate\Support\Facades\Session;
+use App\Exports\StudentsExport;
+use Excel;
 
 
 class StudentController extends Controller
@@ -114,4 +116,8 @@ class StudentController extends Controller
 
         return back();
     }
+
+    public function exportIntoExcel() {
+        return Excel::download(new StudentsExport, "students.xlsx"); 
+    } 
 }

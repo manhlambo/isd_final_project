@@ -12,8 +12,9 @@
   @endif 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <div class="card-header py-3" style="display:flex; justify-content: space-between;">
               <h6 class="m-0 font-weight-bold text-primary">Tất Cả Giáo Viên</h6>
+              <a href="{{ route('teachers.export') }}" class="btn btn-success" >Xuất dữ liệu</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
