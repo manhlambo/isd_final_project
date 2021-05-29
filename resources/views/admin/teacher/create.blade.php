@@ -21,7 +21,7 @@
                         autocomplete="user_id" autofocus>
 
                             @error('user_id')
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: red;">{{ $message }}</strong>
                             @enderror       
                 </div>
 
@@ -36,7 +36,7 @@
 
                             @error('dob')
                                 
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: red;">{{ $message }}</strong>
                                 
                             @enderror       
                 </div>
@@ -51,7 +51,7 @@
 
                             @error('phone')
                                 
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: red;">{{ $message }}</strong>
                                 
                             @enderror       
                 </div>

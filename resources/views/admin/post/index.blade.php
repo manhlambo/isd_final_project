@@ -30,17 +30,7 @@
                       <th>Chức Năng</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Người Đăng</th>
-                      <th>Tiêu đề</th>
-                      <th>Nội dung</th>
-                      <th>Ngày tạo</th>
-                      <th>Ngày sửa đổi</th>
-                      <th>Chức năng</th>
-                    </tr>
-                  </tfoot>
+
                   <tbody>
                       @foreach($posts as $post)
                     <tr>

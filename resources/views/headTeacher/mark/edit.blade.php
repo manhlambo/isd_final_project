@@ -37,7 +37,7 @@
                             autocomplete="oral" autofocus>
     
                                 @error('oral')
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                 @enderror       
                     </div>
 
@@ -52,7 +52,7 @@
     
                                 @error('midterm')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -67,13 +67,13 @@
     
                                 @error('final')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
 
                     <div class="row pt-4">
-                        <button class="btn btn-primary">Sửa Điểm</button>
+                        <button class="btn btn-primary">Cập nhật điểm</button>
                     </div>
     
                 </div>

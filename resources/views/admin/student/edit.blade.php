@@ -22,7 +22,7 @@
                             autocomplete="name" autofocus>
     
                                 @error('name')
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                 @enderror       
                     </div>
     
@@ -37,7 +37,7 @@
     
                                 @error('dob')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -57,7 +57,7 @@
                             <option {{old('student',$student->gender)=="Không xác định"? 'selected':''}}  value="Không xác định">Không xác định</option>
                             </select>
                                 @error('gender')
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                 @enderror       
                     </div>
 
@@ -71,7 +71,7 @@
     
                                 @error('parent_name')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -86,7 +86,7 @@
     
                                 @error('parent_email')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -103,7 +103,7 @@
     
                                 @error('parent_phone')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -118,7 +118,7 @@
     
                                 @error('classroom_id')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>

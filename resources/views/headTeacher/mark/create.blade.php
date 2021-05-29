@@ -22,7 +22,7 @@
                             autocomplete="student_id" autofocus>
     
                                 @error('student_id')
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                 @enderror       
                     </div>
     

@@ -30,7 +30,7 @@
                             </select>
 
                                 @error('grade')
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                 @enderror       
                     </div>
     
@@ -53,7 +53,7 @@
 
                                 @error('name')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>
@@ -67,7 +67,7 @@
                             name="teacher_id" value="{{ old('teacher_id') ?? $classroom->teacher->id ?? '' }}"  autocomplete="teacher_id" autofocus>
                                 @error('teacher_id')
                                     
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
                     </div>

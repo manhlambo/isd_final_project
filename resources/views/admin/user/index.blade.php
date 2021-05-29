@@ -6,56 +6,49 @@
     <div class="alert alert-danger">{{Session::get('delete-user')}}</div>
 @endif
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Người dùng</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>                      
-                      <th>ID</th>
-                      <th>Tên</th>
-                      <th>Địa chỉ email</th>
-                      <th>Ngày tạo</th>
-                      <th>Ngày sửa đổi</th>
-                      <th>Chức Năng</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Tên</th>
-                      <th>Địa chỉ email</th>
-                      <th>Ngày tạo</th>
-                      <th>Ngày sửa đổi</th>
-                      <th>Chức năng</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                      @foreach($users as $user)
-                    <tr>
-                      <td>{{$user->id}}</td>
-                      <td><a href="{{route('user.profile.show', $user->id)}}">{{$user->name}}</a></td>
-                      <td>{{$user->email}}</td>
-                      <td>{{date('d-m-Y', Strtotime($user->created_at))}}</td>
-                      <td>{{date('d-m-Y', Strtotime($user->updated_at))}}</td>
-                      <td>
-                          <form action="{{route('user.destroy', $user->id)}}" method='post' enctype='multipart/form-data'>
-                          @csrf
-                          @method('DELETE')
-                            <button type='submit' class="btn btn-danger">Xóa</button>
-                          </form>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Người dùng</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>                      
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Địa chỉ email</th>
+            <th>Ngày tạo</th>
+            <th>Ngày sửa đổi</th>
+            <th>Chức Năng</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            @foreach($users as $user)
+          <tr>
+            <td>{{$user->id}}</td>
+            <td><a href="{{route('user.profile.show', $user->id)}}">{{$user->name}}</a></td>
+            <td>{{$user->email}}</td>
+            <td>{{date('d-m-Y', Strtotime($user->created_at))}}</td>
+            <td>{{date('d-m-Y', Strtotime($user->updated_at))}}</td>
+            <td>
+
+              <form action="{{route('user.destroy', $user->id)}}" method='post' enctype='multipart/form-data'>
+                @csrf
+                @method('DELETE')
+                  <button type='submit' class="btn btn-danger">Xóa</button>
+              </form>
+
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('scripts')

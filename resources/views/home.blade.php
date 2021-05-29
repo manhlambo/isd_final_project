@@ -15,11 +15,11 @@
             <h2><a href="" style="color: #E07C24; text-decoration: none;">{{$post->title}}</a></h2>
             <i class="user" style="color: #E07C24;">Được đăng bởi <b>{{$post->user->name}}</b></i>
             &nbsp;
-            <i class="calendar" style="color: #E07C24;">- {{ $post->show_time() }} </i>
+            <i class="calendar" style="color: #E07C24;">- {{ date('d-m-Y', Strtotime($post->updated_at)) }} </i>
             <p class="preview-text">
               {{ Str::limit($post->content, '100', '...') }}
             </p>
-            <a href="{{route('posts.show', $post->id)}}" class="btn-readmore">Read More</a>
+            <a href="{{route('posts.show', $post->id)}}" class="btn-readmore">Đọc tiếp</a>
             <!-- <img src="{{asset('homepage/images/file_10-128.png')}}" alt="excel" class="attachments" style="height: 64px; width: 64px;">  -->
             <!-- <a href="">file.xls</a>  -->
         </div>

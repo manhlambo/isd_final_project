@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +22,7 @@
                         <tr>
                             <th width="50%">Ngày sinh</th>
                             <td width="2%">:</td>
-                            <td>{{$dob}}</td>
+                            <td>{{date('d-m-Y', Strtotime($dob))}}</td>
                         </tr>
                         <tr>
                             <th width="50%">Lớp </th>
@@ -43,10 +42,30 @@
                         </tr>
 
 
+                    <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Tên môn học</th>
+                          <th>Điểm kiểm tra miệng</th>
+                          <th>Điểm kiểm tra giữa kỳ</th>
+                          <th>Điểm kiểm tra cuối kỳ</th>
+                          <th>Điểm trung bình</th> 
+                        </tr>
+                      </thead>
 
-
-
-
+                      <tbody>
+                          @foreach($student->marks as $s_mark)
+                        <tr>
+                          <td>{{$s_mark->subject->name}}</td>
+                          <td>{{$s_mark->oral}}</td>
+                          <td>{{$s_mark->midterm}}</td>
+                          <td>{{$s_mark->final}}</td>
+                          <td><b>{{$s_mark->overall}}</b></td>
+                        </tr>  
+                         @endforeach
+                      </tbody>
+                    </table>
 
 
                         <tr>

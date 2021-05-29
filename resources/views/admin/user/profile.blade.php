@@ -61,24 +61,22 @@
                 <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Options</th>
+                      <th>Lựa chọn</th>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Slug</th>
-                      <th>Attach</th>
-                      <th>Detach</th>
+                      <th>Vai trò</th>
+                      <th>Chức năng</th>
+                      <th>Chức năng</th>
                     </tr>
                   </thead>
-                  <tfoot>
+                  {{-- <tfoot>
                     <tr>
-                      <th>Options</th>
-                      <th>id</th>
-                      <th>Name</th>
-                      <th>Slug</th>
-                      <th>Attach</th>
-                      <th>Detach</th>
+                      <th>Lựa chọn</th>
+                      <th>ID/th>
+                      <th>Vai trò</th>
+                      <th>Gán</th>
+                      <th>Bỏ gắn</th>
                     </tr>
-                  </tfoot>
+                  </tfoot> --}}
                   <tbody>
                     @foreach($roles as $role)
                     <tr>
@@ -91,8 +89,7 @@
                         ></td>
                       <td>{{$role->id}}</td>
                       <td>{{$role->name}}</td>
-                      <td>{{$role->slug}}</td>
-                      <td>
+                        <td>
                         <form action="{{route('user.role.attach', $user->id)}}" method='post'>
                           @csrf
                           @method('PATCH')
@@ -104,7 +101,7 @@
                                   @if($user->roles->contains($role))
                                     disabled
                                   @endif
-                                  >Attach</button>
+                                  >Gán</button>
 
                         </form>
                       </td>
@@ -120,7 +117,7 @@
                                   @if(!$user->roles->contains($role))
                                     disabled
                                   @endif
-                                  >Detach</button>
+                                  >Bỏ gán</button>
 
                         </form>
                       </td>

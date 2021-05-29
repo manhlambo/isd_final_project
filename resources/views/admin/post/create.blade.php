@@ -16,7 +16,7 @@
                 name="title" value="{{ old('title') }}"  
                 autocomplete="title" autofocus>
                 @error('title')
-                    <strong>{{ $message }}</strong>
+                    <strong style="color: red;">{{ $message }}</strong>
                 @enderror       
             </div>
 
@@ -29,17 +29,17 @@
                     cols='30'
                     rows='10'></textarea>
                     @error('content')
-                            <strong>{{ $message }}</strong>
+                            <strong style="color: red;">{{ $message }}</strong>
                     @enderror       
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <label for="file">File</label>
                 <input type="file"
                         name="file"
                         class="form-control-file"
                         id="file">
-            </div>
+            </div> --}}
          
             <div class="row pt-4">
                 <button class="btn btn-primary">Thêm thông báo</button>

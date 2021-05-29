@@ -39,7 +39,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                  <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{route('home')}} ">Trang chủ <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="#">Về trường học</a>
@@ -68,24 +68,24 @@
         <div class="carousel-item active">
             <img class="d-block w-100" src="{{asset('homepage/images/element5-digital-OyCl7Y4y0Bk-unsplash.jpg')}}" alt="First slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              <h5>Chào mừng đến với trường tiểu học EMS</h5>
+              {{-- <p>Some representative placeholder content for the first slide.</p> --}}
             </div>
         </div>
 
         <div class="carousel-item">
             <img class="d-block w-100" src="{{asset('homepage/images/susan-yin-2JIvboGLeho-unsplash.jpg')}}" alt="Second slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <h5>Thư viện đồ sộ</h5>
+              {{-- <p>Some representative placeholder content for the second slide.</p> --}}
             </div>
         </div>
 
         <div class="carousel-item">
           <img class="d-block w-100" src="{{asset('homepage/images/neonbrand-zFSo6bnZJTw-unsplash.jpg')}}" alt="Third slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <h5>Lớp học năng động</h5>
+                {{-- <p>Some representative placeholder content for the third slide.</p> --}}
             </div>        
         </div>         
       </div>

@@ -29,16 +29,7 @@
                       <th>Chức năng</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Họ và tên</th>
-                      <th>Địa chỉ email</th>
-                      <th>Ngày sinh</th>
-                      <th>Số Điện Thoại</th>
-                      <th>Chức năng</th>
-                    </tr>
-                  </tfoot>
+
                   <tbody>
                       @foreach($teachers as $teacher)
                     <tr>

@@ -31,19 +31,7 @@
                           <th>Chủ nhiệm</th>    
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Họ và tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Phụ huynh</th>
-                            <th>Email phụ huynh</th>
-                            <th>SĐT phụ huynh</th>
-                            <th>Lớp học</th>
-                            <th>Chủ nhiệm</th>     
-                        </tr>
-                      </tfoot>
+
                       <tbody>
                           @foreach ($students as $student)
                         <tr>

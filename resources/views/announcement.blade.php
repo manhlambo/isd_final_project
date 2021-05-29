@@ -13,7 +13,7 @@
 <hr>
 
 <!-- Date/Time -->
-<p>Đăng vào {{ $post->show_time() }}</p>
+<p>Đăng vào {{ date('d-m-Y', Strtotime($post->updated_at)) }}</p>
 
 <hr>
 

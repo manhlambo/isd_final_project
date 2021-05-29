@@ -27,15 +27,7 @@
                           <th>Chức năng</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Khối</th>
-                            <th>Tên lớp</th>
-                            <th>Giáo viên chủ nhiệm</th>
-                            <th>Chức năng</th>
-                        </tr>
-                      </tfoot>
+
                       <tbody>
                         @foreach ($classrooms as $classroom)
                         <tr>

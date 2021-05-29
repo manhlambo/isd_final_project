@@ -10,6 +10,8 @@ use App\Mark;
 use Illuminate\Support\Facades\Mail;
 
 
+
+
 class MarkController extends Controller
 {
     public function studentsList(){
@@ -104,6 +106,8 @@ class MarkController extends Controller
 
     public function send(Student $student, Request $req){
 
+
+
         $data = [
             'name' => $student->name,
             'class' => $student->classroom->grade.$student->classroom->name,
@@ -112,12 +116,8 @@ class MarkController extends Controller
             'dob' => $student->dob,
             'parent_name' => $student->parent_name,
             'parent_email' => $student->parent_email,
-            'subject_name' => $student->subjects,
             
-
-
-
-
+            'student' => $student,
 
             'body' => $req->body
         ];
@@ -127,6 +127,8 @@ class MarkController extends Controller
             $message->to($student->parent_email) -> subject("Thông báo kết quả học tập");
 
         });
+
+        Session::flash('success', 'Gửi email thành công');
         
         return back();
     }

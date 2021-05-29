@@ -17,7 +17,7 @@
 
                 <div>
                     @error('name')
-                        <span><strong>{{$message}}</strong></span>
+                        <span><strong style="color: red;">{{$message}}</strong></span>
                     @enderror
                 </div>
             </div>  
@@ -37,27 +37,18 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>id</th>
-                      <th>Name</th>
-                      <th>Slug</th>
+                      <th>ID</th>
+                      <th>Role</th>
                       <th>Chức Năng</th>
                       
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>id</th>
-                      <th>Name</th>
-                      <th>Slug</th>
-                      <th>Chức Năng</th>
-                    </tr>
-                  </tfoot>
+
                   <tbody>
                       @foreach($roles as $role)
                     <tr>
                       <td>{{$role->id}}</td>
                       <td><a href="{{route('role.edit', $role->id)}}">{{$role->name}}</a></td>
-                      <td>{{$role->slug}}</td>
                       <td>
                           <form action="{{route('role.destroy', $role->id)}}" method='post' enctype='multipart/form-data'>
                           @csrf

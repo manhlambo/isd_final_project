@@ -1,5 +1,17 @@
 <x-admin-master>
 @section('content')
+
+@if(Session::has('success'))
+<div class="alert alert-success">{{Session::get('success')}}</div>
+
+@elseif(Session::has('updated-message'))
+<div class="alert alert-success">{{Session::get('updated-message')}}</div>
+@elseif(Session::has('destroy-message'))
+<div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
+
+@endif 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +43,11 @@
                             <th width="50%">Lớp </th>
                             <td width="2%">:</td>
                             <td>{{$student->classroom->grade.$student->classroom->name}}</td>
+                        </tr>
+                        <tr>
+                            <th width="50%">Họ tên phụ huynh học sinh </th>
+                            <td width="2%">:</td>
+                            <td>{{$student->parent_name}}</td>
                         </tr>
                         <tr>
                             <th width="50%">Giáo viên chủ nhiệm </th>

@@ -7,32 +7,31 @@
         @method("PATCH")
         <div class="row">
             <div class="col-8 offset-1">
-                <div class="row"><h2>Update role: {{$role->name}}</h2></div>
+                <div class="row"><h2>Cập nhật role</h2></div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label">Role</label>   
+                    <label for="name" class="col-md-4 col-form-label"></label>   
                     <input id="name" 
                     type="text" 
                     class="form-control @error('name') is-invalid @enderror" 
                     name="name" value="{{ old('name') ?? $role->name}}"  
                     autocomplete="name" autofocus>
                     @error('name')
-                        <strong>{{ $message }}</strong>
+                        <strong style="color: red;" >{{ $message }}</strong>
                     @enderror       
                 </div>
 
                 <div class="row pt-4">
-                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-primary">Cập nhật</button>
                 </div>
 
                 </div>
             </div>
         </form>
 
-        <hr>
 
         <div class="col-10">
-        <div class="card shadow mb-4">
+        {{-- <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Permissions</h6>
             </div>
@@ -85,7 +84,13 @@
               </div>
             </div>
           </div>
-    </div>
+
+
+
+    </div> --}}
+
+  </div>
+  
 
 
 

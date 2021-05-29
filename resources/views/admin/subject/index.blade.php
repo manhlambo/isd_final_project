@@ -29,7 +29,7 @@
     
                     <div>
                         @error('name')
-                            <span><strong>{{$message}}</strong></span>
+                            <span><strong style="color: red;">{{$message}}</strong></span>
                         @enderror
                     </div>
                 </div>  
@@ -45,7 +45,7 @@
     
                     <div>
                         @error('assign')
-                            <span><strong>{{$message}}</strong></span>
+                            <span><strong style="color: red;">{{$message}}</strong></span>
                         @enderror
                     </div>
                 </div>
@@ -71,14 +71,7 @@
                           <th>Chức Năng</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>ID</th>
-                          <th>Tên</th>
-                          <th>Giảng viên</th>
-                          <th>Chức Năng</th>
-                        </tr>
-                      </tfoot>
+
                       <tbody>
                           @foreach ($subjects as $subject)
                           <tr>

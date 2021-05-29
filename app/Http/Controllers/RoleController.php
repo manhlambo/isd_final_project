@@ -22,6 +22,9 @@ class RoleController extends Controller
 
         request()->validate([
             'name' => 'required | unique:roles,name',
+        ], [
+            'name.required' => 'Vui lòng điền tên',
+            'name.unique' => 'Tên đã tồn tại'
         ]);
 
         Role::create([

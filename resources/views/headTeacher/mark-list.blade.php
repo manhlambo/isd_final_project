@@ -11,7 +11,7 @@
         
       @endif 
 <h2>{{ $student->name }} - ID: {{ $student->id }} - Lớp: {{ $student->classroom->grade.$student->classroom->name }}
-    - Chủ nhiệm: {{ $student->classroom->teacher->user->name }}
+    - Chủ nhiệm: {{ isset($student->classroom->teacher) ? $student->classroom->teacher->user->name: 'N/a' }}
 </h2>
 
       {{-- {{ Bảng môn học }} --}}
@@ -28,12 +28,7 @@
                   <th>Tên môn học</th> 
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên môn học</th>
-                </tr>
-              </tfoot>
+
               <tbody>
                   @foreach ($student->subjects as $s_subject)
                 <tr>
@@ -62,19 +57,10 @@
                           <th>Điểm kiểm tra giữa kỳ</th>
                           <th>Điểm kiểm tra cuối kỳ</th>
                           <th>Điểm trung bình</th> 
-                          <th></th>  
+                          <th>Tính Điểm</th>  
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                            <th>Tên môn học</th>
-                            <th>Điểm kiểm tra miệng</th>
-                            <th>Điểm kiểm tra giữa kỳ</th>
-                            <th>Điểm kiểm tra cuối kỳ</th>
-                            <th>Điểm trung bình</th>
-                            <th></th>    
-                        </tr>
-                      </tfoot>
+
                       <tbody>
                           @foreach ($student->marks as $s_mark)
                         <tr>
@@ -98,7 +84,9 @@
                 </div>
               </div>
               <div>
-              <a href="{{route('mark.email', $student)}}">Gửi email</a></div>
+              {{-- <a href="{{route('mark.email', $student)}}">Gửi email</a></div> --}}
+              <a class="btn btn-primary" href="{{route('mark.email', $student)}}" role="button">Gửi email</a>
+
     @endsection
 
     @section('scripts')

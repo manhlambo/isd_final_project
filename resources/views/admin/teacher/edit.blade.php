@@ -21,7 +21,7 @@
 
                             @error('dob')
                                 
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: red;">{{ $message }}</strong>
                                 
                             @enderror       
                 </div>
@@ -36,7 +36,7 @@
 
                             @error('phone')
                                 
-                                    <strong>{{ $message }}</strong>
+                                    <strong style="color: red;">{{ $message }}</strong>
                                 
                             @enderror       
                 </div>
