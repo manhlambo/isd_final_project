@@ -21,7 +21,7 @@
             <th>Địa chỉ email</th>
             <th>Ngày tạo</th>
             <th>Ngày sửa đổi</th>
-            <th>Chức Năng</th>
+            <th>Xóa</th>
           </tr>
         </thead>
 
@@ -38,7 +38,9 @@
               <form action="{{route('user.destroy', $user->id)}}" method='post' enctype='multipart/form-data'>
                 @csrf
                 @method('DELETE')
-                  <button type='submit' class="btn btn-danger">Xóa</button>
+                  <button type='submit' class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-trash"></i>
+                  </button>
               </form>
 
             </td>

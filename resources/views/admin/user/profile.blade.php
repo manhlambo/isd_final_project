@@ -64,19 +64,10 @@
                       <th>Lựa chọn</th>
                       <th>ID</th>
                       <th>Vai trò</th>
-                      <th>Chức năng</th>
-                      <th>Chức năng</th>
+                      <th>Gán</th>
+                      <th>Bỏ gán</th>
                     </tr>
                   </thead>
-                  {{-- <tfoot>
-                    <tr>
-                      <th>Lựa chọn</th>
-                      <th>ID/th>
-                      <th>Vai trò</th>
-                      <th>Gán</th>
-                      <th>Bỏ gắn</th>
-                    </tr>
-                  </tfoot> --}}
                   <tbody>
                     @foreach($roles as $role)
                     <tr>
@@ -97,11 +88,11 @@
                           <input type="hidden" name='role' value='{{$role->id}}'>
 
                           <button type='submit'
-                                  class="btn btn-primary"
+                                  class="btn btn-success btn-circle btn-sm"
                                   @if($user->roles->contains($role))
                                     disabled
                                   @endif
-                                  >Gán</button>
+                                  ><i class="fas fa-check"></i></button>
 
                         </form>
                       </td>
@@ -113,11 +104,11 @@
                           <input type="hidden" name='role' value='{{$role->id}}'>
 
                           <button type='submit'
-                                  class="btn btn-danger"
+                                  class="btn btn-danger btn-circle btn-sm"
                                   @if(!$user->roles->contains($role))
                                     disabled
                                   @endif
-                                  >Bỏ gán</button>
+                                  ><i class="fas fa-trash"></i></button>
 
                         </form>
                       </td>

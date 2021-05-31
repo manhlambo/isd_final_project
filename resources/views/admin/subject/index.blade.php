@@ -68,7 +68,7 @@
                           <th>ID</th>
                           <th>Tên</th>
                           <th>Giảng viên</th>
-                          <th>Chức Năng</th>
+                          <th>Xóa</th>
                         </tr>
                       </thead>
 
@@ -82,7 +82,9 @@
                                 <form action="{{ route('subject.destroy', $subject->id) }}" method='post' enctype='multipart/form-data'>
                                 @csrf
                                 @method('DELETE')
-                                  <button type='submit' class="btn btn-danger">Xóa</button>
+                                  <button type='submit' class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                  </button>
                                 </form>
                             </td>
                           </tr>

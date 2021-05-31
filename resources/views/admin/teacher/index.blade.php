@@ -14,7 +14,14 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3" style="display:flex; justify-content: space-between;">
               <h6 class="m-0 font-weight-bold text-primary">Tất Cả Giáo Viên</h6>
-              <a href="{{ route('teachers.export') }}" class="btn btn-success" >Xuất dữ liệu</a>
+
+              <a href="{{ route('teachers.export') }}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="far fa-file-excel"></i>
+                </span>
+                <span class="text">Xuất dữ liệu</span>
+              </a>
+
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -26,7 +33,7 @@
                       <th>Địa chỉ email</th>
                       <th>Ngày sinh</th>
                       <th>Số Điện Thoại</th>      
-                      <th>Chức năng</th>
+                      <th>Xóa</th>
                     </tr>
                   </thead>
 
@@ -42,7 +49,9 @@
                         <form action="{{ route('teacher.destroy', $teacher->id) }}" method='post' enctype='multipart/form-data'>
                           @csrf
                           @method('DELETE')
-                            <button type='submit' class="btn btn-danger">Xóa</button>
+                            <button type='submit' class="btn btn-danger btn-circle btn-sm">
+                              <i class='fas fa-trash'></i>
+                            </button>
                         </form>
                       </td>
                     </tr>

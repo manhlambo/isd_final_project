@@ -55,7 +55,7 @@ class UserController extends Controller
     public function destroy(User $user){
         $user->delete();
 
-        Session::flash('delete-user', 'User was deleted');
+        Session::flash('delete-user', 'Người dùng đã được xóa khỏi hệ thống thành công');
 
         return back();
     }

@@ -14,6 +14,8 @@
     - Chủ nhiệm: {{ isset($student->classroom->teacher) ? $student->classroom->teacher->user->name: 'N/a' }}
 </h2>
 
+<hr>
+
       {{-- {{ Bảng môn học }} --}}
       <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -73,7 +75,9 @@
                             <form action="{{ route('mark.compute', $s_mark) }}" method='post' enctype='multipart/form-data'>
                               @csrf
                               @method('PATCH')
-                                <button type='submit' class="btn btn-success">Tính điểm</button>
+                                <button type='submit' class="btn btn-success btn-circle btn-sm">
+                                  <i class="fas fa-calculator"></i>
+                                </button>
                               </form>
                           </td>
                         </tr>                         
@@ -84,8 +88,13 @@
                 </div>
               </div>
               <div>
-              {{-- <a href="{{route('mark.email', $student)}}">Gửi email</a></div> --}}
-              <a class="btn btn-primary" href="{{route('mark.email', $student)}}" role="button">Gửi email</a>
+
+              <a href="{{route('mark.email', $student)}}" class="btn btn-light btn-icon-split">
+                <span class="icon text-gray-600">
+                  <i class="far fa-paper-plane"></i>
+                </span>
+                <span class="text">Gửi email cho phụ huynh</span>
+              </a>
 
     @endsection
 

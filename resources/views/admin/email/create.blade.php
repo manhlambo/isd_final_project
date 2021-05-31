@@ -11,23 +11,24 @@
 
 @endif 
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <body>
     
     <form action="" method="post" role="form">
     {{ csrf_field() }}
-        <h1 color="black">Thông báo kết quả học tập</h1>
+        <h1 style='text-align: center;' color="black" >Thông báo kết quả học tập</h1>
+
+        <hr>
+
         <!-- Student Profile Details -->
         <div class="col-lg-8" position="rea">
             <div class="card shadow-sm">
                 <div class="card-header bg-transparent border-0">
-                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin học sinh</h3>
+                    <h3 class="mb-0"><i class="fas fa-user-graduate"></i>&nbsp;Thông tin học sinh</h3>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" >
 
                         <tr>
                             <th width="50%">Họ và tên</th>
@@ -89,15 +90,21 @@
                     </table>
 
                     <div class="form-group">
-                        <label for="">Nhận xét của giáo viên:</label>
+                        <label for=""><b>Nhận xét của giáo viên:</b></label>
                         <textarea name="body" placeholder="Nhận xét ở đây" class="form-control" rows="5"></textarea>
                     </div>
                 </div>
             
             </div>
-            <hr>
 
-            <button type="submit" class='btn btn-success'>Gửi email</button>
+           <div style='text-align: center;'>
+                <button type="submit" class='btn btn-light btn-icon-split' >
+                    <span class="icon text-white-50">
+                        <i class="far fa-paper-plane"></i>
+                    </span>
+                    <span class="text">Gửi email</span>
+                </button>
+           </div>
 
         </div>
 

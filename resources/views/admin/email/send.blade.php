@@ -4,7 +4,7 @@
 <body>
     
     <form action="" method="post" role="form">
-        <h1 color="black">Thông báo kết quả học tập</h1>
+        <h1 color="black" style='text-align: center;'>Thông báo kết quả học tập</h1>
         <!-- Student Profile Details -->
         <div class="col-lg-8" position="rea">
             <div class="card shadow-sm">
@@ -69,7 +69,7 @@
 
 
                         <tr>
-                            <th width="50%">Nhận xét của giáo viên</th>
+                            <th width="50%"><b>Nhận xét của giáo viên</b></th>
                             <td width="2%">:</td>
                             <td>{{ $body }}</td>
                         </tr>
