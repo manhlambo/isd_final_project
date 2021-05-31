@@ -9,6 +9,8 @@ use App\Post;
 use App\Role;
 use App\Permission;
 use Illuminate\Support\Str;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
+
 
 class User extends Authenticatable
 {
@@ -68,6 +70,12 @@ class User extends Authenticatable
 
     public function teacher(){
         return $this->hasOne(Teacher::class);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPasswordNotification($token));
     }
 
 
