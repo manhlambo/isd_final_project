@@ -4,12 +4,17 @@
 <body>
     
     <form action="" method="post" role="form">
-        <h1 color="black" style='text-align: center;'>Thông báo kết quả học tập</h1>
+        {{-- <h1 color="black" style='text-align: center;'>Thông báo kết quả học tập</h1> --}}
+        <h3>Xin chào a/c {{ $student->parent_name }}, phụ huynh của cháu {{ $name }}, nhà trường chúng tôi gửi thư này để 
+        thông báo kết quả học tập và rèn luyện của cháu trong kỳ học vừa qua ở trường. Nếu có bất cứ phản hồi nào 
+        xin vui lòng a/c gửi mail cho giáo viên chủ nhiệm.</h3>
+
+
         <!-- Student Profile Details -->
         <div class="col-lg-8" position="rea">
             <div class="card shadow-sm">
                 <div class="card-header bg-transparent border-0">
-                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin học sinh</h3>
+                    <h3 style='text-align: center;' class="mb-0">Thông tin học sinh</h3>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table table-bordered">

@@ -124,7 +124,7 @@ class MarkController extends Controller
 
 
         Mail::send('admin.email.send',$data, function($message) use($student) {
-            $message->to($student->parent_email) -> subject("Thông báo kết quả học tập");
+            $message->to($student->parent_email) -> subject("Thư thông báo kết quả học tập");
 
         });
 
