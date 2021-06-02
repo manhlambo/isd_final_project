@@ -75,7 +75,8 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index');
     }
 
-    public function destroy(Teacher $teacher){
+    public function destroy(Request $request){
+        $teacher = Teacher::findOrFail($request->teacher_id);
         $teacher->delete();
 
         Session::flash('destroy-message', 'Giáo viên đã được xóa thành công');

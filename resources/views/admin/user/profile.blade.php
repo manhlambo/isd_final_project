@@ -3,7 +3,8 @@
 
     @section('content')
 
-        <h2>Thông tin người dùng: {{$user->name}} - ID: {{ $user->id }}</h2>
+        <h2 style ='text-align: center;'>Thông tin người dùng: {{$user->name}} - ID: {{ $user->id }}</h2>
+        <hr>
 
 
        <div class="row">

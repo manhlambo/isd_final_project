@@ -36,10 +36,13 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function destroy(Post $post){
+    public function destroy(Request $request){
+        $post = Post::findOrFail($request->post_id);
+
         $post->delete();
 
         Session::flash('message', 'Thông báo đã được xóa thành công');
+
         return back();
     }
 

@@ -68,11 +68,21 @@ class SubjectController extends Controller
         return redirect()->route('subjects.index');
     }
 
-    public function destroy(Subject $subject){
+    public function destroy(Request $request){
+        // $subject->delete();
+
+        // Session::flash('destroy-message', 'Môn học đã được xóa thành công');
+        
+        // return back();
+
+    //    dd($request->subject_id);
+
+        $subject = Subject::findOrFail($request->subject_id);
+
         $subject->delete();
 
         Session::flash('destroy-message', 'Môn học đã được xóa thành công');
-        
+
         return back();
     }
 }

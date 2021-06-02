@@ -12,6 +12,55 @@
   @endif 
     
 <h2>Quản Lý Môn Học</h2>   
+
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteSubject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form action="/subjects/{subject}" method='post' >
+            @csrf
+            @method('DELETE')
+              <div class="modal-body">
+                <p>
+                  <b>Khi xóa môn học này, toàn bộ học sinh đang theo học môn học và điểm số cũng sẽ bị xóa.
+                    <br>
+                    <br> 
+                    Hãy đảm bảo bạn đã sao lưu toàn bộ điểm và kiểm tra kỹ thông tin môn học.
+
+                  </b>
+                </p>
+
+                <input type="hidden" name='subject_id' id='sub_id' value=''>
+
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn-icon-split" data-dismiss="modal"> 
+                  <span class="icon text-white-50">
+                    <i class="fas fa-window-close"></i>
+                  </span>
+                  <span class="text">Hủy</span>
+                </button>
+
+                <button type="submit" class="btn btn-danger btn-circle ">
+                  <i class="fas fa-trash"></i>
+                </button>
+
+              </div>
+
+         </form>
+
+        </div>
+      </div>
+    </div>
  
     <div class="row">
     
@@ -73,19 +122,25 @@
                       </thead>
 
                       <tbody>
-                          @foreach ($subjects as $subject)
+                          @foreach ($subjects as $sub)
                           <tr>
-                            <td>{{ $subject->id }}</td>
-                            <td><a href="{{ route('subject.edit', $subject->id) }}">{{ $subject->name }}</a></td>
-                            <td>{{ $subject->assign }}</td>
+                            <td>{{ $sub->id }}</td>
+                            <td><a href="{{ route('subject.edit', $sub->id) }}">{{ $sub->name }}</a></td>
+                            <td>{{ $sub->assign }}</td>
                             <td>
-                                <form action="{{ route('subject.destroy', $subject->id) }}" method='post' enctype='multipart/form-data'>
+
+                                {{-- <form action="{{ route('subject.destroy', $sub->id) }}" method='post' enctype='multipart/form-data'>
                                 @csrf
                                 @method('DELETE')
                                   <button type='submit' class="btn btn-danger btn-circle btn-sm">
                                     <i class="fas fa-trash"></i>
                                   </button>
-                                </form>
+                                </form> --}}
+
+                                <button class="btn btn-danger btn-circle btn-sm" data-subid={{ $sub->id }} data-toggle="modal" data-target="#deleteSubject">
+                                  <i class="fas fa-trash"></i>
+                                </button>
+
                             </td>
                           </tr>
                           @endforeach
@@ -96,5 +151,26 @@
               </div>
         </div>
     </div>
+
+
+
     @endsection
+
+    @section('scripts')
+
+    <script>
+
+      $('#deleteSubject').on('shown.bs.modal', function (event) {
+      
+        var button = $(event.relatedTarget)
+
+        var sub_id = button.data('subid')
+        var modal = $(this)
+
+        modal.find('.modal-body #sub_id').val(sub_id);
+    })
+       
+    </script> 
+    @endsection
+
     </x-admin-master>

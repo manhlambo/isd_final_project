@@ -13,7 +13,7 @@
   
         <div class="post-preview">
             <h2><a href="" style="color: #E07C24; text-decoration: none;">{{$post->title}}</a></h2>
-            <i class="user" style="color: #E07C24;">Được đăng bởi <b>{{$post->user->name}}</b></i>
+            <i class="user" style="color: #E07C24;">Được đăng bởi <b>{{isset($post->user) ? $post->user->name: 'N/a'}}</b></i>
             &nbsp;
             <i class="calendar" style="color: #E07C24;">- {{ date('d-m-Y', Strtotime($post->updated_at)) }} </i>
             <p class="preview-text">

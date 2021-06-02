@@ -70,10 +70,14 @@ class ClassRoomController extends Controller
         return redirect()->route('classrooms.index');
     }
 
-    public function destroy(ClassRoom $classroom){
+    public function destroy(Request $request){
+
+        $classroom = ClassRoom::findOrFail($request->classroom_id);
+
         $classroom->delete();
 
         Session::flash('destroy-message', 'Lớp học đã được xóa thành công');
+        
         return back();
     }
 }

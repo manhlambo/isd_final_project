@@ -37,7 +37,9 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return back();
+        Session::flash('message', 'Cập nhật thông tin người dùng thành công.');
+
+        return redirect()->route('users.index');
     }
 
     public function attach(User $user){
@@ -52,11 +54,15 @@ class UserController extends Controller
         return back();
     }
 
-    public function destroy(User $user){
+    public function destroy(Request $request){
+        
+        $user = User::findOrFail($request->user_id);
         $user->delete();
 
         Session::flash('delete-user', 'Người dùng đã được xóa khỏi hệ thống thành công');
 
         return back();
+
+        
     }
 }

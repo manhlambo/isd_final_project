@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Role;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
+
 
 
 
@@ -32,6 +34,8 @@ class RoleController extends Controller
             'slug' => Str::of(Str::lower(request('name')))->slug('_'),
         ]);
 
+        Session::flash('message', 'Vai trò đã được tạo thành công');
+
         return back();
     }
 
@@ -53,12 +57,18 @@ class RoleController extends Controller
 
         $role->update();
 
+        Session::flash('updated', 'Thông tin vai trò đã được cập nhật thành công');
+
         return redirect()->route('roles.index');
         
     }
 
-    public function destroy(Role $role){
+    public function destroy(Request $request){
+        $role = Role::findOrFail($request->role_id);
+
         $role->delete();
+
+        Session::flash('destroy', 'Vai trò đã được xóa thành công');
 
         return back();
     }

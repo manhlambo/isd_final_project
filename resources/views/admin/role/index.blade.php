@@ -1,5 +1,65 @@
 <x-admin-master>
+
+
 @section('content')
+
+@if(Session::has('message'))
+        <div class="alert alert-success">{{Session::get('message')}}</div>
+        
+        @elseif(Session::has('updated'))
+        <div class="alert alert-success">{{Session::get('updated')}}</div>
+        @elseif(Session::has('destroy'))
+        <div class="alert alert-danger">{{Session::get('destroy')}}</div>
+        
+@endif 
+
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Xác nhận xóa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form action="/roles/{role}" method='post' >
+            @csrf
+            @method('DELETE')
+              <div class="modal-body">
+                <p>
+                  <b>Khi xóa vai trò, toàn bộ các dữ liệu bao gồm thông tin vai trò người dùng đều sẽ bị xóa vĩnh viễn khỏi hệ thống.
+                  <br> 
+                  <br>
+                  Hãy kiểm tra kỹ thông tin vai trò trước khi xóa.
+                  </b>
+                </p>
+
+                <input type="hidden" name='role_id' id='role_id' value=''>
+
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn-icon-split" data-dismiss="modal"> 
+                  <span class="icon text-white-50">
+                    <i class="fas fa-window-close"></i>
+                  </span>
+                  <span class="text">Hủy</span>
+                </button>
+
+                <button type="submit" class="btn btn-danger btn-circle ">
+                  <i class="fas fa-trash"></i>
+                </button>
+                
+              </div>
+
+         </form>
+
+        </div>
+      </div>
+    </div>
 
 <div class="row">
 
@@ -29,7 +89,7 @@
     <div class="col-sm-9">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Roles</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Vai trò</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -37,7 +97,7 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Role</th>
+                      <th>Vai trò</th>
                       <th>Xóa</th>
                       
                     </tr>
@@ -49,13 +109,11 @@
                       <td>{{$role->id}}</td>
                       <td><a href="{{route('role.edit', $role->id)}}">{{$role->name}}</a></td>
                       <td>
-                          <form action="{{route('role.destroy', $role->id)}}" method='post' enctype='multipart/form-data'>
-                          @csrf
-                          @method('DELETE')
-                            <button type='submit' class="btn btn-danger btn-circle btn-sm">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </form>
+
+                        <button class="btn btn-danger btn-circle btn-sm"  data-roleid={{ $role->id }} data-toggle="modal" data-target="#deleteRole">
+                          <i class="fas fa-trash"></i>
+                        </button>
+
                       </td>
                     </tr>
                     @endforeach
@@ -66,5 +124,23 @@
           </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+
+<script>
+
+  $('#deleteRole').on('shown.bs.modal', function (event) {
+  
+    var button = $(event.relatedTarget)
+
+    var role_id = button.data('roleid')
+    var modal = $(this)
+
+    modal.find('.modal-body #role_id').val(role_id);
+})
+   
+</script> 
+    
 @endsection
 </x-admin-master>

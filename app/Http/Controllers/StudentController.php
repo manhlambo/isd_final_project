@@ -92,7 +92,10 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-    public function destroy(Student $student){
+    public function destroy(Request $request){
+
+        $student = Student::findOrFail($request->student_id);
+
         $student->delete();
 
         Session::flash('destroy-message', 'Học sinh đã được xóa thành công');

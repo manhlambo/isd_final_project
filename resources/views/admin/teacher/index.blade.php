@@ -10,6 +10,54 @@
     <div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
     
   @endif 
+  
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteTeacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Xác nhận xóa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form action="/teachers/{teacher}" method='post' >
+            @csrf
+            @method('DELETE')
+              <div class="modal-body">
+                <p>
+                  <b>Khi xóa giáo viên, toàn bộ các dữ liệu bao gồm thông tin giáo viên, lớp học và học sinh giáo viên quản lý đều sẽ bị xóa vĩnh viễn khỏi hệ thống.
+                  <br> 
+                  <br>
+                  Hãy kiểm tra kỹ thông tin giáo viên trước khi xóa.
+                  </b>
+                </p>
+
+                <input type="hidden" name='teacher_id' id='teacher_id' value=''>
+
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn-icon-split" data-dismiss="modal"> 
+                  <span class="icon text-white-50">
+                    <i class="fas fa-window-close"></i>
+                  </span>
+                  <span class="text">Hủy</span>
+                </button>
+
+                <button type="submit" class="btn btn-danger btn-circle ">
+                  <i class="fas fa-trash"></i>
+                </button>
+                
+              </div>
+
+         </form>
+
+        </div>
+      </div>
+    </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3" style="display:flex; justify-content: space-between;">
@@ -43,16 +91,14 @@
                       <td>{{ $teacher->id }}</td>
                       <td><a href="{{ route('teacher.edit', $teacher->id) }}">{{ $teacher->user->name }}</a></td>
                       <td>{{ $teacher->user->email }}</td>
-                      <td>{{ date('d-m-Y', Strtotime($teacher->dob)) }}</td>
+                      <td>{{ isset($teacher->dob) ? date('d-m-Y', Strtotime($teacher->dob)): '' }}</td>
                       <td>{{ $teacher->phone }}</td>
                       <td>
-                        <form action="{{ route('teacher.destroy', $teacher->id) }}" method='post' enctype='multipart/form-data'>
-                          @csrf
-                          @method('DELETE')
-                            <button type='submit' class="btn btn-danger btn-circle btn-sm">
-                              <i class='fas fa-trash'></i>
-                            </button>
-                        </form>
+
+                        <button class="btn btn-danger btn-circle btn-sm" data-teacherid={{ $teacher->id }} data-toggle="modal" data-target="#deleteTeacher">
+                          <i class="fas fa-trash"></i>
+                        </button>
+
                       </td>
                     </tr>
                     @endforeach
@@ -72,6 +118,20 @@
 
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
+
+  <script>
+
+    $('#deleteTeacher').on('shown.bs.modal', function (event) {
+    
+      var button = $(event.relatedTarget)
+  
+      var teacher_id = button.data('teacherid')
+      var modal = $(this)
+  
+      modal.find('.modal-body #teacher_id').val(teacher_id);
+  })
+     
+  </script> 
 
 
 

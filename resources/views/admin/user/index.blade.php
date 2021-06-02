@@ -3,7 +3,58 @@
 
 @if(Session::has('delete-user'))
     <div class="alert alert-danger">{{Session::get('delete-user')}}</div>
+    @elseif(Session::has('message'))
+        <div class="alert alert-success">{{Session::get('message')}}</div>
+
 @endif
+
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Xác nhận xóa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form action="/users/{user}" method='post' >
+            @csrf
+            @method('DELETE')
+              <div class="modal-body">
+                <p>
+                  <b>Khi xóa người dùng, toàn bộ các dữ liệu bao gồm thông tin và vai trò đều sẽ bị xóa vĩnh viễn khỏi hệ thống.
+                  <br> 
+                  <br>
+                  Hãy kiểm tra kỹ thông tin người dùng trước khi xóa.
+                  </b>
+                </p>
+
+                <input type="hidden" name='user_id' id='per_id' value=''>
+
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn-icon-split" data-dismiss="modal"> 
+                  <span class="icon text-white-50">
+                    <i class="fas fa-window-close"></i>
+                  </span>
+                  <span class="text">Hủy</span>
+                </button>
+
+                <button type="submit" class="btn btn-danger btn-circle ">
+                  <i class="fas fa-trash"></i>
+                </button>
+                
+              </div>
+
+         </form>
+
+        </div>
+      </div>
+    </div>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -25,22 +76,18 @@
         </thead>
 
         <tbody>
-            @foreach($users as $user)
+            @foreach($users as $per)
           <tr>
-            <td>{{$user->id}}</td>
-            <td><a href="{{route('user.profile.show', $user->id)}}">{{$user->name}}</a></td>
-            <td>{{$user->email}}</td>
-            <td>{{date('d-m-Y', Strtotime($user->created_at))}}</td>
-            <td>{{date('d-m-Y', Strtotime($user->updated_at))}}</td>
+            <td>{{$per->id}}</td>
+            <td><a href="{{route('user.profile.show', $per->id)}}">{{$per->name}}</a></td>
+            <td>{{$per->email}}</td>
+            <td>{{date('d-m-Y', Strtotime($per->created_at))}}</td>
+            <td>{{date('d-m-Y', Strtotime($per->updated_at))}}</td>
             <td>
 
-              <form action="{{route('user.destroy', $user->id)}}" method='post' enctype='multipart/form-data'>
-                @csrf
-                @method('DELETE')
-                  <button type='submit' class="btn btn-danger btn-circle btn-sm">
-                    <i class="fas fa-trash"></i>
-                  </button>
-              </form>
+              <button class="btn btn-danger btn-circle btn-sm" data-perid={{ $per->id }} data-toggle="modal" data-target="#deleteUser">
+                <i class="fas fa-trash"></i>
+              </button>
 
             </td>
           </tr>
@@ -59,6 +106,20 @@
 
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
+
+  <script>
+
+    $('#deleteUser').on('shown.bs.modal', function (event) {
+    
+      var button = $(event.relatedTarget)
+
+      var per_id = button.data('perid')
+      var modal = $(this)
+
+      modal.find('.modal-body #per_id').val(per_id);
+  })
+     
+  </script> 
 
 @endsection
 </x-admin-master>

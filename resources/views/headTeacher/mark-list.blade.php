@@ -10,7 +10,7 @@
         <div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
         
       @endif 
-<h2>{{ $student->name }} - ID: {{ $student->id }} - Lớp: {{ $student->classroom->grade.$student->classroom->name }}
+<h2>{{ $student->name }} - ID: {{ $student->id }} - Lớp: {{ isset($student->classroom) ? $student->classroom->grade.$student->classroom->name: 'N/a' }}
     - Chủ nhiệm: {{ isset($student->classroom->teacher) ? $student->classroom->teacher->user->name: 'N/a' }}
 </h2>
 
@@ -35,7 +35,7 @@
                   @foreach ($student->subjects as $s_subject)
                 <tr>
                   <td>{{ $s_subject->id }}</td>  
-                  <td><a href="{{ route('mark.create', $s_subject) }}">{{ $s_subject->name }}</a></td>                      
+                  <td><a href="{{ route('mark.create', $s_subject) }}">{{ isset($s_subject) ? $s_subject->name: "Môn học đã bị xóa" }}</a></td>                      
                 @endforeach
               </tbody>
             </table>
@@ -66,7 +66,7 @@
                       <tbody>
                           @foreach ($student->marks as $s_mark)
                         <tr>
-                          <td><a href="{{ route('mark.edit', $s_mark) }}">{{ $s_mark->subject->name }}</a></td>
+                          <td><a href="{{ route('mark.edit', $s_mark) }}">{{ isset($s_mark->subject) ? $s_mark->subject->name: 'Môn học đã bị xóa' }}</a></td>
                           <td>{{ $s_mark->oral }}</td>
                           <td>{{ $s_mark->midterm }}</td>
                           <td>{{ $s_mark->final }}</td>

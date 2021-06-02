@@ -11,6 +11,54 @@
     
 
 @endif
+
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Xác nhận xóa</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form action="/posts/{post}" method='post' >
+            @csrf
+            @method('DELETE')
+              <div class="modal-body">
+                <p>
+                  <b>Khi xóa thông báo, toàn bộ thông tin về thông báo sẽ bị xóa vĩnh viễn khỏi hệ thống.
+                  <br> 
+                  <br>
+                  Hãy kiểm tra kỹ thông báo trước khi xóa.
+                  </b>
+                </p>
+
+                <input type="hidden" name='post_id' id='post_id' value=''>
+
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn-icon-split" data-dismiss="modal"> 
+                  <span class="icon text-white-50">
+                    <i class="fas fa-window-close"></i>
+                  </span>
+                  <span class="text">Hủy</span>
+                </button>
+
+                <button type="submit" class="btn btn-danger btn-circle ">
+                  <i class="fas fa-trash"></i>
+                </button>
+                
+              </div>
+
+         </form>
+
+        </div>
+      </div>
+    </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -35,19 +83,17 @@
                       @foreach($posts as $post)
                     <tr>
                       <td>{{$post->id}}</td>
-                      <td>{{$post->user->name}}</td>
+                      <td>{{isset($post->user) ? $post->user->name: 'N/a'}}</td>
                       <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
                       <td>{{Str::limit($post->content, '10', '...')}}</td>
                       <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
                       <td>{{date('d-m-Y', strtotime($post->updated_at))}}</td>
                       <td>
-                          <form action="{{route('posts.destroy', $post->id)}}" method='post' enctype='multipart/form-data'>
-                          @csrf
-                          @method('DELETE')
-                            <button type='submit' class="btn btn-danger btn-circle btn-sm">
-                              <i class='fas fa-trash'></i>
-                            </button>
-                          </form>
+
+                        <button class="btn btn-danger btn-circle btn-sm" data-postid={{ $post->id }} data-toggle="modal" data-target="#deletePost">
+                          <i class="fas fa-trash"></i>
+                        </button>
+
                       </td>
                     </tr>
                     @endforeach
@@ -65,6 +111,18 @@
 
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
+
+  <script>
+      $('#deletePost').on('shown.bs.modal', function (event) {
+  
+        var button = $(event.relatedTarget)
+
+        var post_id = button.data('postid')
+        var modal = $(this)
+
+        modal.find('.modal-body #post_id').val(post_id);
+      })
+  </script>
 
 @endsection
 </x-admin-master>
