@@ -71,6 +71,7 @@
             <th>Địa chỉ email</th>
             <th>Ngày tạo</th>
             <th>Ngày sửa đổi</th>
+            <th>Tạo giáo viên</th>
             <th>Xóa</th>
           </tr>
         </thead>
@@ -83,6 +84,11 @@
             <td>{{$per->email}}</td>
             <td>{{date('d-m-Y', Strtotime($per->created_at))}}</td>
             <td>{{date('d-m-Y', Strtotime($per->updated_at))}}</td>
+            <td>
+              <a href="{{ route('teacher.create', $per) }}" class = "btn btn-success btn-circle btn-sm">
+                <i class="fas fa-plus-circle"></i>
+              </a>
+            </td>
             <td>
 
               <button class="btn btn-danger btn-circle btn-sm" data-perid={{ $per->id }} data-toggle="modal" data-target="#deleteUser">

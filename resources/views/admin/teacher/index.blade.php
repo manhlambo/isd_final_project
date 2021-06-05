@@ -70,13 +70,6 @@
                   </span>
                   <span class="text">Xuất dữ liệu</span>
                 </a>
-
-                <a href="{{ route('teacher.create') }}" class="btn btn-primary btn-icon-split">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-plus-circle"></i>
-                  </span>
-                  <span class="text">Thêm giáo viên</span>
-                </a>
               @endcan
 
             </div>

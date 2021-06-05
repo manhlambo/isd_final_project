@@ -86,8 +86,8 @@ Route::get('/permissions', 'PermissionController@index')->name('permissions.inde
  * Teachers
  */
 Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
-Route::get('/teachers/create', 'TeacherController@create')->name('teacher.create');
-Route::post('/teachers', 'TeacherController@store')->name('teacher.store');
+Route::get('/teachers/{user}/create', 'TeacherController@create')->name('teacher.create');
+Route::post('/teachers/{user}', 'TeacherController@store')->name('teacher.store');
 Route::get('/teachers/{teacher}/edit', 'TeacherController@edit')->name('teacher.edit');
 Route::patch('/teachers/{teacher}', 'TeacherController@update')->name('teacher.update');
 Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher.destroy');
@@ -96,8 +96,8 @@ Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher
  * Students
  */
 Route::get('/students', 'StudentController@index')->name('students.index');
-Route::get('students/create', 'StudentController@create')->name('student.create');
-Route::post('students', 'StudentController@store')->name('student.store');
+Route::get('students/{classroom}/create', 'StudentController@create')->name('student.create');
+Route::post('students/{classroom}', 'StudentController@store')->name('student.store');
 Route::get('students/{student}/edit', 'StudentController@edit')->name('student.edit');
 Route::patch('students/{student}', 'StudentController@update')->name('student.update');
 Route::delete('students/{student}', 'StudentController@destroy')->name('student.destroy');

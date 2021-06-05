@@ -84,6 +84,7 @@
                 <th>Khối</th>
                 <th>Tên lớp</th>
                 <th>Giáo viên chủ nhiệm</th>
+                <th>Thêm học sinh</th>
                 <th>Xóa</th>
               </tr>
             </thead>
@@ -102,15 +103,20 @@
                 </td>
                 <td>{{ $classroom->grade }}</td>
                 <td>{{ $classroom->name }}</td>
-                <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td> 
+                <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td>
                 <td>
-
+                  @can('create', App\ClassRoom::class)
+                    <a href="{{ route('student.create', $classroom) }}" class = "btn btn-success btn-circle btn-sm">
+                      <i class="fas fa-plus-circle"></i>
+                    </a>
+                  @endcan
+                </td>
+                <td>
                   @can('create', App\ClassRoom::class)
                   <button class="btn btn-danger btn-circle btn-sm" data-classroomid={{ $classroom->id }} data-toggle="modal" data-target="#deleteClass">
                     <i class="fas fa-trash"></i>
                   </button>
                   @endcan
-
                 </td>
               </tr>
               @endforeach

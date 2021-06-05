@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Teacher;
+use App\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use App\Exports\TeachersExport;
@@ -25,14 +26,16 @@ class TeacherController extends Controller
     ]);
     }
 
-    public function create(){
+    public function create(User $user){
 
         $this->authorize('create', Teacher::class);
 
-        return view('admin.teacher.create');
+        return view('admin.teacher.create', [
+            'user' => $user,
+        ]);
     }
 
-    public function store(){
+    public function store(User $user){
 
         $data = request()->validate([
 
@@ -46,14 +49,16 @@ class TeacherController extends Controller
         ], [
             'user_id.required' => 'Vui lòng nhập ID của người dùng',
             'user_id.exists' => 'ID không tồn tại', 
-            'user_id.unique' => 'ID không hợp lệ',
+            'user_id.unique' => 'Người dùng đã là giáo viên',
             'user_id.numeric' => 'ID phải là chữ số',
             
             'phone.digits:10' => 'Số điện thoại không hợp lệ',
             'phone.unique' => 'Số điện thoại đã tồn tại'
         ]);
 
-        Teacher::create($data);
+        // Teacher::create($data);
+
+        $user->teacher()->create($data);
     
         Session::flash('message', 'Giáo viên đã được thêm thành công');
         return redirect()->route('teachers.index');
@@ -85,10 +90,10 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index');
     }
 
-    public function destroy(Request $request, Teacher $teacher){
-
+    public function destroy(Request $request){
 
         $teacher = Teacher::findOrFail($request->teacher_id);
+        
         $teacher->delete();
 
         Session::flash('destroy-message', 'Giáo viên đã được xóa thành công');

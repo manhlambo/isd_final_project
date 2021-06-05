@@ -72,13 +72,6 @@
             <i class="far fa-file-excel"></i>
           </span>
           <span class="text">Xuất dữ liệu</span>
-
-          <a href="{{ route('student.create') }}" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-              <i class="fas fa-plus-circle"></i>
-            </span>
-            <span class="text">Thêm học sinh</span>
-          </a>
         </a>                 
         @endcan
 

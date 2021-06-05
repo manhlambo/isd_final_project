@@ -3,7 +3,7 @@
 
 <div class="container">
 
-    <form action="{{route('teacher.store')}}" method="post">
+    <form action="{{route('teacher.store', $user)}}" method="post">
         <!-- validate data that come from the server or not -->
         @csrf 
         <div class="row">
@@ -12,12 +12,12 @@
                 <div class="row"><h1>Thêm giáo viên</h1></div>
 
                 <div class="form-group row">
-                    <label for="user_id" class="col-md-4 col-form-label">ID Người dùng</label>
-                        
+                    
+                    {{-- <label for="user_id" class="col-md-4 col-form-label">ID Người dùng</label> --}}
                         <input id="user_id" 
-                        type="text" 
+                        type="hidden" 
                         class="form-control @error('user_id') is-invalid @enderror" 
-                        name="user_id" value="{{ old('user_id') }}"  
+                        name="user_id" value="{{ old('user_id') ?? $user->id }}"  
                         autocomplete="user_id" autofocus>
 
                             @error('user_id')

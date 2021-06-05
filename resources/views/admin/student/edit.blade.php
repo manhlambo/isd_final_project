@@ -148,8 +148,8 @@
                           <th>id</th>
                           <th>Tên môn học</th>
                           <th>Giảng viên</th>
-                          <th>Gán</th>
-                          <th>Bỏ Gán</th>
+                          <th>Đăng ký</th>
+                          <th>Hủy đăng ký</th>
                         </tr>
                       </thead>
                       <tbody>

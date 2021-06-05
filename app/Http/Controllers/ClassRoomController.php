@@ -45,7 +45,7 @@ class ClassRoomController extends Controller
                 }),
                 ],
 
-            'teacher_id' => 'nullable | numeric | exists:teachers,id|unique:teachers,id',
+            'teacher_id' => 'nullable|numeric|exists:teachers,id|unique:class_rooms,teacher_id',
             
         ], [
             'grade.required' => 'Vui lòng điền tên khối học',
@@ -54,8 +54,8 @@ class ClassRoomController extends Controller
             'name.unique' => 'Lớp học đã tồn tại',
 
             'teacher_id.numeric' => 'ID giáo viên phải là số',
-            'teacher_id.exists' => 'ID giáo viên không tồn tại', 
-            'teacher_id.unique' => 'ID giáo viên đã tồn tại', 
+            'teacher_id.exists' => 'ID giáo viên không tồn tại',
+            'teacher_id.unique' => 'ID giáo viễn đã tồn tại', 
         ]);
 
         ClassRoom::create($data);
@@ -89,7 +89,12 @@ class ClassRoomController extends Controller
                 }),
             ],
 
-            'teacher_id' => 'nullable|numeric|exists:teachers,id',
+            'teacher_id' => [
+                'nullable',
+                'numeric',
+                'exists:teachers,id',
+                Rule::unique('class_rooms', 'teacher_id')->ignore($classroom),
+            ],
         ], [
 
             'grade.required' => 'Vui lòng điền tên khối học',

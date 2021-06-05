@@ -3,7 +3,7 @@
     
     <div class="container">
     
-        <form action="{{ route('student.store') }}" method="post">
+        <form action="{{ route('student.store', $classroom)}}" method="post">
             <!-- validate data that come from the server or not -->
             @csrf 
             <div class="row">
@@ -52,7 +52,7 @@
 
                             <option selected="true" disabled="disabled"> Hãy chọn giới tính </option>
                             <option>Nam</option>
-                            <option>Nứ</option>
+                            <option>Nữ</option>
                             <option>Không xác định</option> 
                             </select>
     
@@ -108,7 +108,7 @@
                                 @enderror       
                     </div>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="classroom_id" class="col-md-4 col-form-label">Lớp học (ID)</label>
                             
                             <input id="classroom_id" 
@@ -121,7 +121,7 @@
                                         <strong style="color: red;">{{ $message }}</strong>
                                     
                                 @enderror       
-                    </div>
+                    </div> --}}
     
                     <div class="row pt-4">
                         <button class="btn btn-primary">Thêm học sinh</button>
