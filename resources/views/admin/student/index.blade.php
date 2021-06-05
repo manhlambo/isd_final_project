@@ -60,66 +60,86 @@
       </div>
     </div>
 
-              <!-- DataTales Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3" style="display:flex; justify-content: space-between;">
-                  <h6 class="m-0 font-weight-bold text-primary">Tất Cả Học Sinh</h6>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3" style="display:flex; justify-content: space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Tất Cả Học Sinh</h6>
 
-                  <a href="{{ route('students.export') }}" class="btn btn-success btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="far fa-file-excel"></i>
-                    </span>
-                    <span class="text">Xuất dữ liệu</span>
-                  </a>
+        @can('create', App\Student::class)
 
-                </div>                
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Họ và tên</th>
-                          <th>Ngày sinh</th>
-                          <th>Giới tính</th>
-                          <th>Phụ huynh</th>
-                          <th>Email phụ huynh</th>
-                          <th>SĐT phụ huynh</th>
-                          <th>Lớp học</th>  
-                          <th>Chủ nhiệm</th>    
-                          <th>Xóa</th>
-                        </tr>
-                      </thead>
+        <a href="{{ route('students.export') }}" class="btn btn-success btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="far fa-file-excel"></i>
+          </span>
+          <span class="text">Xuất dữ liệu</span>
 
-                      <tbody>
-                          @foreach ($students as $student)
-                        <tr>
-                          <td>{{ $student->id }}</td>
-                          <td><a href="{{ route('student.edit', $student->id) }}">{{ $student->name }}</a></td>
-                          <td>{{ Date('d-m-Y', Strtotime( $student->dob)) }}</td>
-                          <td>{{ $student->gender }}</td>
-                          <td>{{ $student->parent_name }}</td>
-                          <td>{{ $student->parent_email }}</td>
-                          <td>{{ $student->parent_phone }}</td>
-                          {{-- <td>{{ $student->classroom->grade.$student->classroom->name }}</td> --}}
-                          <td>{{ isset($student->classroom) ? $student->classroom->grade.$student->classroom->name: 'N/a'}}</td>
-                          {{-- <td>{{ $student->classroom->teacher->user->name}}</td> --}}
-                          <td>{{ isset($student->classroom->teacher) ?  $student->classroom->teacher->user->name: 'N/a' }}</td>
-                          <td>
+          <a href="{{ route('student.create') }}" class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+            <span class="text">Thêm học sinh</span>
+          </a>
+        </a>                 
+        @endcan
 
-                            <button class="btn btn-danger btn-circle btn-sm" data-studentid={{ $student->id }}  data-toggle="modal" data-target="#deleteStudent">
-                              <i class="fas fa-trash"></i>
-                            </button>
+      </div>                
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Phụ huynh</th>
+                <th>Email phụ huynh</th>
+                <th>SĐT phụ huynh</th>
+                <th>Lớp học</th>  
+                <th>Chủ nhiệm</th>    
+                <th>Xóa</th>
+              </tr>
+            </thead>
 
-                          </td>
-                        </tr>                         
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-    @endsection
+            <tbody>
+                @foreach ($students as $student)
+              <tr>
+                <td>{{ $student->id }}</td>
+                <td>
+                  @can('update', $student)
+                  <a href="{{ route('student.edit', $student->id) }}">{{ $student->name }}</a>
+                  @endcan
+
+                  @cannot('update', $student)
+                    {{ $student->name }}
+                  @endcannot
+                </td>
+                <td>{{ Date('d-m-Y', Strtotime( $student->dob)) }}</td>
+                <td>{{ $student->gender }}</td>
+                <td>{{ $student->parent_name }}</td>
+                <td>{{ $student->parent_email }}</td>
+                <td>{{ $student->parent_phone }}</td>
+                {{-- <td>{{ $student->classroom->grade.$student->classroom->name }}</td> --}}
+                <td>{{ isset($student->classroom) ? $student->classroom->grade.$student->classroom->name: 'N/a'}}</td>
+                {{-- <td>{{ $student->classroom->teacher->user->name}}</td> --}}
+                <td>{{ isset($student->classroom->teacher) ?  $student->classroom->teacher->user->name: 'N/a' }}</td>
+                <td>
+
+                  @can('create', App\Student::class)
+                  <button class="btn btn-danger btn-circle btn-sm" data-studentid={{ $student->id }}  data-toggle="modal" data-target="#deleteStudent">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  @endcan
+
+                </td>
+              </tr>                         
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+@endsection
     
     
     

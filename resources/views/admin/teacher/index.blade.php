@@ -63,12 +63,21 @@
             <div class="card-header py-3" style="display:flex; justify-content: space-between;">
               <h6 class="m-0 font-weight-bold text-primary">Tất Cả Giáo Viên</h6>
 
-              <a href="{{ route('teachers.export') }}" class="btn btn-success btn-icon-split">
-                <span class="icon text-white-50">
-                  <i class="far fa-file-excel"></i>
-                </span>
-                <span class="text">Xuất dữ liệu</span>
-              </a>
+              @can('create', App\Teacher::class)
+                <a href="{{ route('teachers.export') }}" class="btn btn-success btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="far fa-file-excel"></i>
+                  </span>
+                  <span class="text">Xuất dữ liệu</span>
+                </a>
+
+                <a href="{{ route('teacher.create') }}" class="btn btn-primary btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text">Thêm giáo viên</span>
+                </a>
+              @endcan
 
             </div>
             <div class="card-body">
@@ -89,16 +98,24 @@
                       @foreach($teachers as $teacher)
                     <tr>
                       <td>{{ $teacher->id }}</td>
-                      <td><a href="{{ route('teacher.edit', $teacher->id) }}">{{ $teacher->user->name }}</a></td>
+                      <td>
+                        @can('update', $teacher)
+                            <a href="{{ route('teacher.edit', $teacher->id) }}">{{ $teacher->user->name }}</a>
+                        @endcan
+
+                        @cannot('update', $teacher)
+                            {{ $teacher->user->name }}
+                        @endcannot
+                      </td>
                       <td>{{ $teacher->user->email }}</td>
                       <td>{{ isset($teacher->dob) ? date('d-m-Y', Strtotime($teacher->dob)): '' }}</td>
                       <td>{{ $teacher->phone }}</td>
-                      <td>
-
+                      <td>  
+                        @can('update', $teacher)
                         <button class="btn btn-danger btn-circle btn-sm" data-teacherid={{ $teacher->id }} data-toggle="modal" data-target="#deleteTeacher">
                           <i class="fas fa-trash"></i>
-                        </button>
-
+                        </button>                      
+                        @endcan
                       </td>
                     </tr>
                     @endforeach

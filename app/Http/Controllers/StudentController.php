@@ -12,6 +12,11 @@ use Excel;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     public function index(){
 
         $students = Student::all();
@@ -22,6 +27,9 @@ class StudentController extends Controller
     }
 
     public function create(){
+
+        $this->authorize('create', Student::class);
+
         return view('admin.student.create');
     }
 
@@ -56,6 +64,8 @@ class StudentController extends Controller
     }
 
     public function edit(Student $student){
+
+        $this->authorize('update', $student);
         
         return view('admin.student.edit', [
             'student' => $student,

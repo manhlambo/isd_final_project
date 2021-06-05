@@ -144,24 +144,14 @@
                     <table class="table table-bordered" id="users-dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Options</th>
+                          <th>Lựa chọn</th>
                           <th>id</th>
                           <th>Tên môn học</th>
                           <th>Giảng viên</th>
-                          <th>Attach</th>
-                          <th>Detach</th>
+                          <th>Gán</th>
+                          <th>Bỏ Gán</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Options</th>
-                          <th>id</th>
-                          <th>Tên môn học</th>
-                          <th>Giảng viên</th>
-                          <th>Attach</th>
-                          <th>Detach</th>
-                        </tr>
-                      </tfoot>
                       <tbody>
                         @foreach ($subjects as $subject)
                         <tr>
@@ -176,36 +166,39 @@
                           <td>{{ $subject->name }}</td>
                           <td>{{ $subject->assign }}</td>
                           <td>
-                            <form action="{{ route('student.subject.attach', $student) }}" method='post'>
-                              @csrf
-                              @method('PATCH')
-                              
-                              <input type="hidden" name='subject' value='{{ $subject->id }}'>
-    
-                              <button type='submit'
-                                      class="btn btn-primary"
-                                      @if ($student->subjects->contains($subject))
-                                          disabled
-                                      @endif
-                                      >Attach</button>
-    
-                            </form>
+                            @if (auth()->user()->userHasRole('Admin'))
+                                <form action="{{ route('student.subject.attach', $student) }}" method='post'>
+                                  @csrf
+                                  @method('PATCH')
+                                  
+                                  <input type="hidden" name='subject' value='{{ $subject->id }}'>
+        
+                                  <button type='submit'
+                                          class="btn btn-success btn-circle btn-sm"
+                                          @if ($student->subjects->contains($subject))
+                                              disabled
+                                          @endif
+                                          ><i class="fas fa-check"></i></button>
+                                </form>
+                            @endif
                           </td>
                           <td>
-                            <form action="{{ route('student.subject.detach', $student) }}" method='post'>
-                              @csrf
-                              @method('PATCH')
-                              
-                              <input type="hidden" name='subject' value='{{ $subject->id }}'>
-    
-                              <button type='submit'
-                                      class="btn btn-danger"
-                                      @if (!$student->subjects->contains($subject))
-                                          disabled
-                                      @endif
-                                      >Detach</button>
-    
-                            </form>
+                              @if (auth()->user()->userHasRole('Admin'))
+                                  <form action="{{ route('student.subject.detach', $student) }}" method='post'>
+                                    @csrf
+                                    @method('PATCH')
+                                    
+                                    <input type="hidden" name='subject' value='{{ $subject->id }}'>
+          
+                                    <button type='submit'
+                                            class="btn btn-danger btn-circle btn-sm"
+                                            @if (!$student->subjects->contains($subject))
+                                                disabled
+                                            @endif
+                                            ><i class="fas fa-trash"></i></button>
+          
+                                  </form>
+                              @endif
                           </td>
                         </tr>
                         @endforeach

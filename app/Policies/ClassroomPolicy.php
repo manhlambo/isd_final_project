@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\ClassRoom;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class ClassroomPolicy
 {
     use HandlesAuthorization;
 
@@ -24,12 +25,12 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\ClassRoom  $classRoom
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user, ClassRoom $classRoom)
     {
-        return $user->userHasRole('Admin') ?: $user->id == $model->id;
+        //
     }
 
     /**
@@ -40,29 +41,29 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\ClassRoom  $classRoom
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user, ClassRoom $classRoom)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\ClassRoom  $classRoom
      * @return mixed
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, ClassRoom $classRoom)
     {
         //
     }
@@ -71,10 +72,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\ClassRoom  $classRoom
      * @return mixed
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, ClassRoom $classRoom)
     {
         //
     }
@@ -83,10 +84,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\ClassRoom  $classRoom
      * @return mixed
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, ClassRoom $classRoom)
     {
         //
     }

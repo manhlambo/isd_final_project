@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ClassRoom;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
+
+
 
 
 class ClassRoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
 
         $classrooms = ClassRoom::all();
@@ -19,17 +26,33 @@ class ClassRoomController extends Controller
     }
 
     public function create(){
+        $this->authorize('create', ClassRoom::class);
+
         return view('admin.classroom.create');
     }
 
-    public function store(){
+    public function store(Request $request){
         $data = request()->validate([
             'grade' => 'required',
-            'name' => 'required',
+            'name' => [
+                'required',
+
+                Rule::unique('class_rooms')->where(function ($query) use ($request) {
+
+                    return $query
+                        ->whereGrade($request->grade)
+                        ->whereName($request->name);
+                }),
+                ],
+
             'teacher_id' => 'nullable | numeric | exists:teachers,id|unique:teachers,id',
+            
         ], [
             'grade.required' => 'Vui lòng điền tên khối học',
+
             'name.required' => 'Vui lòng điền tên lớp học',
+            'name.unique' => 'Lớp học đã tồn tại',
+
             'teacher_id.numeric' => 'ID giáo viên phải là số',
             'teacher_id.exists' => 'ID giáo viên không tồn tại', 
             'teacher_id.unique' => 'ID giáo viên đã tồn tại', 
@@ -44,20 +67,36 @@ class ClassRoomController extends Controller
     }
 
     public function edit(ClassRoom $classroom){
+        $this->authorize('update', $classroom);
+        
         return view('admin.classroom.edit', [
             'classroom' => $classroom,
         ]);
     }
 
-    public function update(ClassRoom $classroom){
+    public function update(ClassRoom $classroom, Request $request){
         $data = request()->validate([
             'grade' => 'required',
-            'name' => 'required',
+            'name' => [
+                'required',
+
+                Rule::unique('class_rooms')->where(function ($query) use ($request, $classroom) {
+
+                    return $query
+                        ->whereGrade($request->grade)
+                        ->whereName($request->name)
+                        ->whereNotIn('id', [$classroom->id]);
+                }),
+            ],
+
             'teacher_id' => 'nullable|numeric|exists:teachers,id',
         ], [
 
             'grade.required' => 'Vui lòng điền tên khối học',
+
             'name.required' => 'Vui lòng điền tên lớp học',
+            'name.unique' => 'Lớp học đã tồn tại',
+            
             'teacher_id.numeric' => 'ID giáo viên phải là số',
             'teacher_id.exists' => 'ID giáo viên không tồn tại',
             'teacher_id.unique' => 'ID giáo viên đã tồn tại', 

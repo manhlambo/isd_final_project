@@ -59,49 +59,70 @@
         </div>
       </div>
     </div>
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Thông báo</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Người Đăng</th>
-                      <th>Tiêu đề</th>
-                      <th>Nội dung</th>
-                      <th>Ngày tạo</th>
-                      <th>Ngày sửa đổi</th>
-                      <th>Xóa</th>
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                      @foreach($posts as $post)
-                    <tr>
-                      <td>{{$post->id}}</td>
-                      <td>{{isset($post->user) ? $post->user->name: 'N/a'}}</td>
-                      <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
-                      <td>{{Str::limit($post->content, '10', '...')}}</td>
-                      <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
-                      <td>{{date('d-m-Y', strtotime($post->updated_at))}}</td>
-                      <td>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3" style="display:flex; justify-content: space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Thông báo</h6>
 
-                        <button class="btn btn-danger btn-circle btn-sm" data-postid={{ $post->id }} data-toggle="modal" data-target="#deletePost">
-                          <i class="fas fa-trash"></i>
-                        </button>
+        @can('create', App\Post::class)
 
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+            <a href="{{route('posts.create')}}" class="btn btn-primary btn-icon-split">
+              <span class="icon text-white-50">
+                <i class="fas fa-plus-circle"></i>
+              </span>
+              <span class="text">Tạo thông báo</span>
+            </a>
+        @endcan
+
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Người Đăng</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Ngày tạo</th>
+                <th>Ngày sửa đổi</th>
+                <th> Xóa</th>
+              
+              </tr>
+            </thead>
+
+            <tbody>
+                @foreach($posts as $post)
+              <tr>
+                <td>{{$post->id}}</td>
+                <td>{{isset($post->user) ? $post->user->name: 'N/a'}}</td>
+                <td>
+                  @can('update', $post)
+                      <a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a>
+                  @endcan
+
+                  @cannot('update', $post)
+                      {{$post->title}}
+                  @endcannot
+                </td>
+                <td>{{Str::limit($post->content, '10', '...')}}</td>
+                <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
+                <td>{{date('d-m-Y', strtotime($post->updated_at))}}</td>
+                <td>
+                  @can('delete', $post)
+                  <button class="btn btn-danger btn-circle btn-sm" data-postid={{ $post->id }} data-toggle="modal" data-target="#deletePost">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  @endcan
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('scripts')

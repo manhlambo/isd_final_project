@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-8 offset-2">
     
-                    <div class="row"><h1>Cập Nhật Điểm: {{ $mark->subject->name }}</h1></div>
+                    <div class="row"><h2>Cập Nhật Điểm: {{ $mark->subject->name }} -  HS: {{ $mark->student->name }}</h2></div>
 
                     <div class="form-group row">
                         <label for="student_id" class="col-md-4 col-form-label">ID Học sinh</label>

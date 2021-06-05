@@ -1,6 +1,4 @@
 <?php
-
-use App\Http\Controllers\MarkController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +14,18 @@ use Illuminate\Support\Facades\Auth;
 */
 Auth::routes();
 
+/**
+ * Trang chủ
+ */
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/admin', 'AdminController@index')->name('admin.index');
+/**
+ * Dashboard
+ */
+Route::get('/dashboard', 'AdminController@index')->name('admin.index');
 
 /**
- * Announcements
+ * Thông báo
  */
 Route::get('/posts', 'PostController@index')->name('posts.index');
 Route::get('/posts/create', 'PostController@create')->name('posts.create');
@@ -32,7 +36,7 @@ Route::patch('posts/{post}', 'PostController@update')->name('posts.update');
 Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
 
 /**
- * user
+ * Users
  */
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
@@ -40,32 +44,38 @@ Route::patch('/users/{user}/update', 'UserController@update')->name('user.profil
 Route::delete('/users/{user}', 'UserController@destroy')->name('user.destroy');
 
 /**
- * route authorization
+ * Role policy
  */
 Route::middleware(['role:admin', 'auth'])->group(function(){
     Route::get('/users', 'UserController@index')->name('users.index');
 
+    /**
+    * Roles
+    */
+    Route::get('/roles', 'RoleController@index')->name('roles.index');
+    Route::post('/roles', 'RoleController@store')->name('role.store');
+    Route::get('/roles/{role}/edit', 'RoleController@Edit')->name('role.edit');
+    Route::patch('/roles/{role}', 'RoleController@update')->name('role.update');
+    Route::delete('/roles/{role}', 'RoleController@destroy')->name('role.destroy');
+
+    //attach & detach role
     Route::patch('/users/{user}/attach', 'UserController@attach')->name('user.role.attach');
     Route::patch('/users/{user}/detach', 'UserController@detach')->name('user.role.detach');
+
+    //attach & detach môn học 
+    Route::patch('students/{student}/attach', 'StudentController@attach')->name('student.subject.attach');
+    Route::patch('students/{student}/detach', 'StudentController@detach')->name('student.subject.detach');
 
 });
 
 /**
  * admin & model owner same access
  */
-Route::middleware(['auth', 'can:view,user'])->group(function(){
+Route::middleware(['can:view,user'])->group(function(){
     Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
 });
 
 
-/**
- * Roles
- */
-Route::get('/roles', 'RoleController@index')->name('roles.index');
-Route::post('/roles', 'RoleController@store')->name('role.store');
-Route::get('/roles/{role}/edit', 'RoleController@Edit')->name('role.edit');
-Route::patch('/roles/{role}', 'RoleController@update')->name('role.update');
-Route::delete('/roles/{role}', 'RoleController@destroy')->name('role.destroy');
 
 /**
  * Permissions
@@ -85,8 +95,6 @@ Route::delete('/teachers/{teacher}', 'TeacherController@destroy')->name('teacher
 /**
  * Students
  */
-
-
 Route::get('/students', 'StudentController@index')->name('students.index');
 Route::get('students/create', 'StudentController@create')->name('student.create');
 Route::post('students', 'StudentController@store')->name('student.store');
@@ -94,9 +102,7 @@ Route::get('students/{student}/edit', 'StudentController@edit')->name('student.e
 Route::patch('students/{student}', 'StudentController@update')->name('student.update');
 Route::delete('students/{student}', 'StudentController@destroy')->name('student.destroy');
 
-//attach & detach môn học 
-Route::patch('students/{student}/attach', 'StudentController@attach')->name('student.subject.attach');
-Route::patch('students/{student}/detach', 'StudentController@detach')->name('student.subject.detach');
+
 
 /**
  * Classrooms
@@ -124,6 +130,7 @@ Route::get('/marks/{subject}/create', 'MarkController@create')->name('mark.creat
 Route::post('/marks/{subject}', 'MarkController@store')->name('mark.store');
 Route::get('/marks/{mark}/edit', 'MarkController@edit')->name('mark.edit');
 Route::patch('/marks/{mark}', 'MarkController@update')->name('mark.update');
+Route::delete('/marks/{mark}', 'MarkController@destroy')->name('mark.destroy');
 
 Route::patch('marks/{mark}/compute', 'MarkController@compute')->name('mark.compute');
 
@@ -133,7 +140,9 @@ Route::get('/marks/{student}', 'MarkController@marksList')->name('marks.list');
 Route::get('/mark/email/{student}','MarkController@email')->name('mark.email');
 Route::post('/mark/email/{student}', 'MarkController@send')->name('mark.send');
 
-
+/**
+ * export
+ */
 Route::get('/export-excel/teacher', 'TeacherController@exportIntoExcel')->name('teachers.export');
 Route::get('/export-excel/student', 'StudentController@exportIntoExcel')->name('students.export');
 

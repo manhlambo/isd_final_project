@@ -58,46 +58,68 @@
         </div>
       </div>
     </div>
-              <!-- DataTales Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Tất Cả Lớp Học</h6>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Khối</th>
-                          <th>Tên lớp</th>
-                          <th>Giáo viên chủ nhiệm</th>
-                          <th>Xóa</th>
-                        </tr>
-                      </thead>
 
-                      <tbody>
-                        @foreach ($classrooms as $classroom)
-                        <tr>
-                          <td><a href="{{ route('classroom.edit', $classroom->id) }}">{{ $classroom->id}}</a></td>
-                          <td>{{ $classroom->grade }}</td>
-                          <td>{{ $classroom->name }}</td>
-                          <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td> 
-                          <td>
 
-                            <button class="btn btn-danger btn-circle btn-sm" data-classroomid={{ $classroom->id }} data-toggle="modal" data-target="#deleteClass">
-                              <i class="fas fa-trash"></i>
-                            </button>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3" style="display:flex; justify-content: space-between;">
+        <h6 class="m-0 font-weight-bold text-primary">Tất Cả Lớp Học</h6>
+        
+        @can('create', App\ClassRoom::class)
+        <a href="{{ route('classroom.create') }}" class="btn btn-primary btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-plus-circle"></i>
+          </span>
+          <span class="text">Thêm lớp học</span>
+        </a>
+        @endcan
 
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-    @endsection
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Khối</th>
+                <th>Tên lớp</th>
+                <th>Giáo viên chủ nhiệm</th>
+                <th>Xóa</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @foreach ($classrooms as $classroom)
+              <tr>
+                <td>
+                  @can('update', $classroom)
+                  <a href="{{ route('classroom.edit', $classroom->id) }}">{{ $classroom->id}}</a>
+                  @endcan
+
+                  @cannot('update', $classroom)
+                    {{ $classroom->id }}
+                  @endcannot
+                </td>
+                <td>{{ $classroom->grade }}</td>
+                <td>{{ $classroom->name }}</td>
+                <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td> 
+                <td>
+
+                  @can('create', App\ClassRoom::class)
+                  <button class="btn btn-danger btn-circle btn-sm" data-classroomid={{ $classroom->id }} data-toggle="modal" data-target="#deleteClass">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  @endcan
+
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+@endsection
     
     
     

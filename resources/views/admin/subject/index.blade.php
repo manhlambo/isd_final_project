@@ -11,8 +11,6 @@
     
   @endif 
     
-<h2>Quản Lý Môn Học</h2>   
-
     <!-- Modal -->
     <div class="modal modal-danger fade" id="deleteSubject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -64,96 +62,103 @@
  
     <div class="row">
     
-        <div class="col-sm-3">
-    
-            <form method='post' action="{{ route('subject.store') }}">
-                @csrf
-                <div class="form-group">
-                    <label for="name">Tên môn học</label>
-                    <input type="text"
-                           name='name'
-                           value="{{ old('name') }}"
-                           id='name' 
-                           class="form-control @error('name') is-invalid @enderror">
-    
-                    <div>
-                        @error('name')
-                            <span><strong style="color: red;">{{$message}}</strong></span>
-                        @enderror
-                    </div>
-                </div>  
+    @can('create', App\Subject::class)
+    <div class="col-sm-3">
 
-                
-                <div class="form-group">
-                    <label for="assign">Giảng Viên</label>
-                    <input type="text"
-                           name='assign'
-                           value="{{ old('assign') }}"
-                           id='assign' 
-                           class="form-control @error('assign') is-invalid @enderror">
-    
-                    <div>
-                        @error('assign')
-                            <span><strong style="color: red;">{{$message}}</strong></span>
-                        @enderror
-                    </div>
-                </div>
-    
-                <button class='btn btn-primary btn-block'>Tạo môn học</button>      
-            
-            </form>
-        </div>
-    
-        <div class="col-sm-9">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Tất cả môn học</h6>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Tên</th>
-                          <th>Giảng viên</th>
-                          <th>Xóa</th>
-                        </tr>
-                      </thead>
+      <form method='post' action="{{ route('subject.store') }}">
+          @csrf
+          <div class="form-group">
+              <label for="name">Tên môn học</label>
+              <input type="text"
+                      name='name'
+                      value="{{ old('name') }}"
+                      id='name' 
+                      class="form-control @error('name') is-invalid @enderror">
 
-                      <tbody>
-                          @foreach ($subjects as $sub)
-                          <tr>
-                            <td>{{ $sub->id }}</td>
-                            <td><a href="{{ route('subject.edit', $sub->id) }}">{{ $sub->name }}</a></td>
-                            <td>{{ $sub->assign }}</td>
-                            <td>
-
-                                {{-- <form action="{{ route('subject.destroy', $sub->id) }}" method='post' enctype='multipart/form-data'>
-                                @csrf
-                                @method('DELETE')
-                                  <button type='submit' class="btn btn-danger btn-circle btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                  </button>
-                                </form> --}}
-
-                                <button class="btn btn-danger btn-circle btn-sm" data-subid={{ $sub->id }} data-toggle="modal" data-target="#deleteSubject">
-                                  <i class="fas fa-trash"></i>
-                                </button>
-
-                            </td>
-                          </tr>
-                          @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <div>
+                  @error('name')
+                      <span><strong style="color: red;">{{$message}}</strong></span>
+                  @enderror
               </div>
-        </div>
+          </div>  
+
+          
+          <div class="form-group">
+              <label for="assign">Giảng Viên</label>
+              <input type="text"
+                      name='assign'
+                      value="{{ old('assign') }}"
+                      id='assign' 
+                      class="form-control @error('assign') is-invalid @enderror">
+
+              <div>
+                  @error('assign')
+                      <span><strong style="color: red;">{{$message}}</strong></span>
+                  @enderror
+              </div>
+          </div>
+
+          <button class='btn btn-primary btn-block'>Tạo môn học</button>      
+      
+      </form>
     </div>
+    @endcan
 
+    @cannot('create', App\Subject::class)
+      <div class="col-sm-1">
+      </div>
+    @endcannot
 
+    
+    <div class="col-sm-9">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Tất cả môn học</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tên</th>
+                      <th>Giảng viên</th>
+                      <th>Xóa</th>
+                    </tr>
+                  </thead>
 
+                  <tbody>
+                      @foreach ($subjects as $sub)
+                      <tr>
+                        <td>{{ $sub->id }}</td>
+                        <td>
+                          @can('update', $sub)
+                          <a href="{{ route('subject.edit', $sub->id) }}">{{ $sub->name }}</a>
+                          @endcan
+
+                          @cannot('update', $sub)
+                            {{ $sub->name }}
+                          @endcannot
+                        </td>
+                        <td>{{ $sub->assign }}</td>
+                        <td>
+                            @can('create', App\Subject::class)
+                            <button class="btn btn-danger btn-circle btn-sm" data-subid={{ $sub->id }} data-toggle="modal" data-target="#deleteSubject">
+                              <i class="fas fa-trash"></i>
+                            </button>                              
+                            @endcan
+
+                        </td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+</div>
     @endsection
 
     @section('scripts')

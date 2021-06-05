@@ -82,36 +82,40 @@
                       <td>{{$role->id}}</td>
                       <td>{{$role->name}}</td>
                         <td>
-                        <form action="{{route('user.role.attach', $user->id)}}" method='post'>
-                          @csrf
-                          @method('PATCH')
-                          
-                          <input type="hidden" name='role' value='{{$role->id}}'>
+                          @if (auth()->user()->userHasRole('Admin'))                                                        
+                            <form action="{{route('user.role.attach', $user->id)}}" method='post'>
+                              @csrf
+                              @method('PATCH')
+                              
+                              <input type="hidden" name='role' value='{{$role->id}}'>
 
-                          <button type='submit'
-                                  class="btn btn-success btn-circle btn-sm"
-                                  @if($user->roles->contains($role))
-                                    disabled
-                                  @endif
-                                  ><i class="fas fa-check"></i></button>
+                              <button type='submit'
+                                      class="btn btn-success btn-circle btn-sm"
+                                      @if($user->roles->contains($role))
+                                        disabled
+                                      @endif
+                                      ><i class="fas fa-check"></i></button>
 
-                        </form>
+                            </form>
+                        @endif
                       </td>
                       <td>
-                        <form action="{{route('user.role.detach', $user->id)}}" method='post'>
-                          @csrf
-                          @method('PATCH')
-                          
-                          <input type="hidden" name='role' value='{{$role->id}}'>
+                        @if (auth()->user()->userHasRole('Admin'))                                                        
+                            <form action="{{route('user.role.detach', $user->id)}}" method='post'>
+                              @csrf
+                              @method('PATCH')
+                              
+                              <input type="hidden" name='role' value='{{$role->id}}'>
 
-                          <button type='submit'
-                                  class="btn btn-danger btn-circle btn-sm"
-                                  @if(!$user->roles->contains($role))
-                                    disabled
-                                  @endif
-                                  ><i class="fas fa-trash"></i></button>
+                              <button type='submit'
+                                      class="btn btn-danger btn-circle btn-sm"
+                                      @if(!$user->roles->contains($role))
+                                        disabled
+                                      @endif
+                                      ><i class="fas fa-trash"></i></button>
+                            </form>
+                        @endif
 
-                        </form>
                       </td>
                     </tr>
                     @endforeach

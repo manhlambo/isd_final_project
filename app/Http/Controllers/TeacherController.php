@@ -12,6 +12,10 @@ use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class TeacherController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function index(){
 
         $teachers = Teacher::all();
@@ -22,10 +26,14 @@ class TeacherController extends Controller
     }
 
     public function create(){
+
+        $this->authorize('create', Teacher::class);
+
         return view('admin.teacher.create');
     }
 
     public function store(){
+
         $data = request()->validate([
 
         /**
@@ -56,6 +64,8 @@ class TeacherController extends Controller
     }
 
     public function update(Teacher $teacher){
+        $this->authorize('update', $teacher);
+
         $data = request()->validate([
             'dob' => 'nullable|date',
 
@@ -75,7 +85,9 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index');
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request, Teacher $teacher){
+
+
         $teacher = Teacher::findOrFail($request->teacher_id);
         $teacher->delete();
 

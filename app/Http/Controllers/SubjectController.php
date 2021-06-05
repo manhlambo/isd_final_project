@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
         $subjects = Subject::all();
 
@@ -20,6 +25,9 @@ class SubjectController extends Controller
     }
 
     public function store(){
+
+        $this->authorize('create', Subject::class);
+
         $data = request()->validate([
             'name' => 'required|string|max:25|unique:subjects,name',
             'assign' => 'nullable|string|max:50|regex:/^([^0-9]*)$/',
@@ -40,6 +48,8 @@ class SubjectController extends Controller
     }
 
     public function edit(Subject $subject){
+        $this->authorize('update', $subject);
+        
         return view('admin.subject.edit', [
             'subject' => $subject
         ]);
@@ -69,13 +79,6 @@ class SubjectController extends Controller
     }
 
     public function destroy(Request $request){
-        // $subject->delete();
-
-        // Session::flash('destroy-message', 'Môn học đã được xóa thành công');
-        
-        // return back();
-
-    //    dd($request->subject_id);
 
         $subject = Subject::findOrFail($request->subject_id);
 

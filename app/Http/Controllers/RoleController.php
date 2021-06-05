@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Permission;
@@ -9,23 +8,24 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
-
-
-
 class RoleController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $roles = Role::all();
         return view('admin.role.index', ['roles' => $roles]);
     }
 
     public function store(){
-        // dd(request('name'));
 
         request()->validate([
-            'name' => 'required | unique:roles,name',
+            'name' => 'required |max:20| unique:roles,name',
         ], [
             'name.required' => 'Vui lòng điền tên',
+            'name.max' => 'Độ dài tên không được vượt quá 20 ký tự',
             'name.unique' => 'Tên đã tồn tại'
         ]);
 
@@ -49,7 +49,11 @@ class RoleController extends Controller
     public function update(Role $role){
 
         request()->validate([
-            'name' => ['required', Rule::unique('roles', 'name')->ignore($role)],
+            'name' => ['required', 'max:20', Rule::unique('roles', 'name')->ignore($role)],
+        ], [
+            'name.required' => 'Vui lòng điền tên',
+            'name.max' => 'Độ dài tên không được vượt quá 20 ký tự',
+            'name.unique' => 'Tên đã tồn tại'
         ]);
 
         $role->name = Str::ucfirst(request('name'));

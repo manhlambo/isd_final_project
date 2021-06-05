@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Teacher;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class TeacherPolicy
 {
     use HandlesAuthorization;
 
@@ -24,12 +25,12 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Teacher  $teacher
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Teacher $teacher)
     {
-        return $user->userHasRole('Admin') ?: $user->id == $model->id;
+        //
     }
 
     /**
@@ -40,41 +41,41 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Teacher  $teacher
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user, Teacher $teacher)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Teacher  $teacher
      * @return mixed
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, Teacher $teacher)
     {
-        //
+
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Teacher  $teacher
      * @return mixed
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, Teacher $teacher)
     {
         //
     }
@@ -83,10 +84,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Teacher  $teacher
      * @return mixed
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Teacher $teacher)
     {
         //
     }

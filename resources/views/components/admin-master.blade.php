@@ -56,8 +56,9 @@
       <!-- Nav Item - Pages Collapse Menu -->
       @if(auth()->user()->userHasRole('Admin'))
       <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
-      @endif
       <x-admin-sidebar-authorization-link> </x-admin-sidebar-authorization-link>
+
+      @endif
 
       <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
 

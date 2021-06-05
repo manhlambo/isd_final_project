@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $posts = Post::all();
         
@@ -16,10 +20,14 @@ class PostController extends Controller
     }
 
     public function create(){
+        $this->authorize('create', Post::class);
+                
         return view ('admin.post.create');
     }
 
     public function store(){
+
+
         $data = request()->validate([
             'title' => 'required | max:255',
             'content' => 'required',
@@ -37,6 +45,7 @@ class PostController extends Controller
     }
 
     public function destroy(Request $request){
+
         $post = Post::findOrFail($request->post_id);
 
         $post->delete();
@@ -51,6 +60,8 @@ class PostController extends Controller
     }
 
     public function update(Post $post){
+        $this->authorize('update', $post);
+
         $data = request()->validate([
             'title' => 'required | max:255',
             'content' => 'required',
