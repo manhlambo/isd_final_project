@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -37,6 +36,9 @@ class MarkController extends Controller
     }
 
     public function create(Subject $subject){
+
+        $this->authorize('create', Mark::class);
+
         return view('headTeacher.mark.create', [
             'subject' => $subject,
         ]);
@@ -57,14 +59,13 @@ class MarkController extends Controller
                 }),
 
             ],
-            'oral' => 'nullable|numeric|between:0,10',
-            'midterm' => 'nullable|numeric|between:0,10',
-            'final' => 'nullable|numeric|between:0,10',
+            // 'oral' => 'nullable|numeric|between:0,10',
+            // 'midterm' => 'nullable|numeric|between:0,10',
+            // 'final' => 'nullable|numeric|between:0,10',
         ], [
             'student_id.required' => 'Vui lòng nhập ID học sinh',
             'student_id.numeric' => 'ID học sinh phải là số',
             'student_id.exists' => 'ID học sinh không tồn tại',
-
             'student_id.unique' => 'Điểm cho học sinh đã tồn tại',
         ]);
 
@@ -72,11 +73,16 @@ class MarkController extends Controller
 
         $subject->marks()->create($data);
 
+        Session::flash('message', 'Điểm đã được thêm thành công');
+
         return redirect()->route('marks.list', $student);
 
     }
 
     public function edit (Mark $mark){
+
+        $this->authorize('update', $mark);
+
         return view('headTeacher.mark.edit', [
             'mark' => $mark,
         ]);
@@ -110,6 +116,8 @@ class MarkController extends Controller
     public function destroy(Request $request){
 
         $mark = Mark::findOrFail($request->mark_id);
+        
+        $this->authorize('delete', $mark);
 
         $mark->delete();
 
@@ -139,7 +147,7 @@ class MarkController extends Controller
 
     public function send(Student $student, Request $req){
 
-
+        
 
         $data = [
             'name' => $student->name,

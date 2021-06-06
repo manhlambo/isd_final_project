@@ -3,6 +3,13 @@
 
     @section('content')
 
+    @if(Session::has('delete-user'))
+    <div class="alert alert-danger">{{Session::get('delete-user')}}</div>
+    @elseif(Session::has('message'))
+        <div class="alert alert-success">{{Session::get('message')}}</div>
+
+    @endif
+
         <h2 style ='text-align: center;'>Thông tin người dùng: {{$user->name}} - ID: {{ $user->id }}</h2>
         <hr>
 

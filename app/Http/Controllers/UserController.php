@@ -16,6 +16,7 @@ class UserController extends Controller
     }
     
     public function index(){
+
         $users = User::all();
         return view('admin.user.index', ['users' => $users] );
     }
@@ -28,6 +29,7 @@ class UserController extends Controller
     }
 
     public function update(User $user){
+
         $data = request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user)],
@@ -43,7 +45,7 @@ class UserController extends Controller
 
         Session::flash('message', 'Cập nhật thông tin người dùng thành công.');
 
-        return redirect()->route('users.index');
+        return back();
     }
 
     public function attach(User $user){

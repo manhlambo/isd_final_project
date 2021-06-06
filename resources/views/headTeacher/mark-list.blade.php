@@ -71,7 +71,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
               <thead class='thead-light'>
                 <tr>
                   <th>ID</th>
@@ -84,10 +84,16 @@
                 <tr>
                   <td>{{ $s_subject->id }}</td>  
                   <td>
-
+                    @can('create', App\Mark::class)
                     <a href="{{ route('mark.create', $s_subject) }}" >
                       {{ isset($s_subject) ? $s_subject->name: "Môn học đã bị xóa" }}
                     </a>
+                    @endcan
+
+                    @cannot('create', App\Mark::class)
+                      {{ isset($s_subject) ? $s_subject->name: "Môn học đã bị xóa" }}
+                    @endcannot
+
 
                   </td>                      
                 @endforeach
@@ -105,7 +111,7 @@
                 <div class="card-body">
                 
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                       <thead class='thead-light'>
                         <tr>
                           <th>Tên môn học</th>
@@ -121,25 +127,41 @@
                       <tbody>
                           @foreach ($student->marks as $s_mark)
                         <tr>
-                          <td><a href="{{ route('mark.edit', $s_mark) }}">{{ isset($s_mark->subject) ? $s_mark->subject->name: 'Môn học đã bị xóa' }}</a></td>
+                          <td>
+                            @can('update', $s_mark)
+                                <a href="{{ route('mark.edit', $s_mark) }}">
+                                  {{ isset($s_mark->subject) ? $s_mark->subject->name: 'Môn học đã bị xóa' }}
+                                </a>
+                            @endcan
+
+                            @cannot('update', $s_mark)
+                              {{ isset($s_mark->subject) ? $s_mark->subject->name: 'Môn học đã bị xóa' }}
+                            @endcannot
+
+
+                          </td>
                           <td>{{ $s_mark->oral }}</td>
                           <td>{{ $s_mark->midterm }}</td>
                           <td>{{ $s_mark->final }}</td>
                           <td><b>{{ $s_mark->overall }}</b></td>
                           <td>
-                            <form action="{{ route('mark.compute', $s_mark) }}" method='post' enctype='multipart/form-data'>
-                              @csrf
-                              @method('PATCH')
+                            @can('update', $s_mark)
+                              <form action="{{ route('mark.compute', $s_mark) }}" method='post' enctype='multipart/form-data'>
+                                @csrf
+                                @method('PATCH')
                                 <button type='submit' class="btn btn-success btn-circle btn-sm">
                                   <i class="fas fa-calculator"></i>
                                 </button>
                               </form>
+                            @endcan
                           </td>
-                          <td>
 
+                          <td>
+                            @can('delete', $s_mark)
                             <button class="btn btn-danger btn-circle btn-sm" data-markid={{ $s_mark->id }} data-toggle="modal" data-target="#deleteMark">
                               <i class="fas fa-trash"></i>
                             </button>
+                            @endcan
                           </td>
 
                         </tr>                         
@@ -151,12 +173,15 @@
               </div>
               <div>
 
+              @can('update', $s_mark)
               <a href="{{route('mark.email', $student)}}" class="btn btn-light btn-icon-split">
                 <span class="icon text-gray-600">
                   <i class="far fa-paper-plane"></i>
                 </span>
                 <span class="text">Gửi email cho phụ huynh</span>
               </a>
+              @endcan
+
 
     @endsection
 

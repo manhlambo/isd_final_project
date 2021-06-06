@@ -14,10 +14,9 @@
                     <div class="row"><h2>Cập Nhật Điểm: {{ $mark->subject->name }} -  HS: {{ $mark->student->name }}</h2></div>
 
                     <div class="form-group row">
-                        <label for="student_id" class="col-md-4 col-form-label">ID Học sinh</label>
                             
                             <input id="student_id" 
-                            type="text" 
+                            type="hidden" 
                             class="form-control @error('student_id') is-invalid @enderror" 
                             name="student_id" value="{{ old('student_id') ?? $mark->student_id }}"  
                             autocomplete="student_id" autofocus readonly>

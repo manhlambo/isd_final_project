@@ -75,8 +75,6 @@ Route::middleware(['can:view,user'])->group(function(){
     Route::get('/users/{user}/profile', 'UserController@show')->name('user.profile.show');
 });
 
-
-
 /**
  * Permissions
  */
@@ -101,8 +99,6 @@ Route::post('students/{classroom}', 'StudentController@store')->name('student.st
 Route::get('students/{student}/edit', 'StudentController@edit')->name('student.edit');
 Route::patch('students/{student}', 'StudentController@update')->name('student.update');
 Route::delete('students/{student}', 'StudentController@destroy')->name('student.destroy');
-
-
 
 /**
  * Classrooms
@@ -145,5 +141,7 @@ Route::post('/mark/email/{student}', 'MarkController@send')->name('mark.send');
  */
 Route::get('/export-excel/teacher', 'TeacherController@exportIntoExcel')->name('teachers.export');
 Route::get('/export-excel/student', 'StudentController@exportIntoExcel')->name('students.export');
+
+
 
 

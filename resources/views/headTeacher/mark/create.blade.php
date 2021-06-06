@@ -26,7 +26,7 @@
                                 @enderror       
                     </div>
     
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="oral" class="col-md-4 col-form-label">Điểm Kiểm Tra Miệng</label>
                             
                             <input id="oral" 
@@ -69,7 +69,7 @@
                                         <strong>{{ $message }}</strong>
                                     
                                 @enderror       
-                    </div>
+                    </div> --}}
 
                     <div class="row pt-4">
                         <button class="btn btn-primary">Thêm Điểm</button>

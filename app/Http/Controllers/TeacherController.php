@@ -80,7 +80,7 @@ class TeacherController extends Controller
              */
             'phone' => ['nullable', 'digits:10', Rule::unique('teachers', 'phone')->ignore($teacher)],
         ], [
-            'phone.digits:10' => 'Số điện thoại không hợp lệ',
+            'phone.digits' => 'Số điện thoại không hợp lệ',
             'phone.unique' => 'Số điện thoại đã tồn tại',
         ]);
 
