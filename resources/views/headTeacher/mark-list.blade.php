@@ -173,14 +173,17 @@
               </div>
               <div>
 
-              @can('update', $s_mark)
-              <a href="{{route('mark.email', $student)}}" class="btn btn-light btn-icon-split">
-                <span class="icon text-gray-600">
-                  <i class="far fa-paper-plane"></i>
-                </span>
-                <span class="text">Gửi email cho phụ huynh</span>
-              </a>
-              @endcan
+              @foreach ($student->marks as $s_mark)
+                  @can('update', $s_mark)
+                  <a href="{{route('mark.email', $student)}}" class="btn btn-light btn-icon-split">
+                    <span class="icon text-gray-600">
+                      <i class="far fa-paper-plane"></i>
+                    </span>
+                    <span class="text">Gửi email cho phụ huynh</span>
+                  </a>
+                  @endcan
+                  @break
+              @endforeach
 
 
     @endsection
