@@ -131,6 +131,7 @@ Route::delete('/marks/{mark}', 'MarkController@destroy')->name('mark.destroy');
 Route::patch('marks/{mark}/compute', 'MarkController@compute')->name('mark.compute');
 
 Route::get('/studentsList', 'MarkController@studentsList')->name('students.list');
+Route::get('/teacherStudentsList', 'MarkController@teacherStudentsList')->name('teacherStudents.list');
 Route::get('/marks/{student}', 'MarkController@marksList')->name('marks.list');
 
 Route::get('/mark/email/{student}','MarkController@email')->name('mark.email');

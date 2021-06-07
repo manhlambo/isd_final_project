@@ -16,7 +16,7 @@
         <!-- Student Profile Details -->
         <div id="wrapper" class="col-lg-8" position="rea">
             <div id="banner">
-                <img src="{{asset('homepage/images/file_10-128.png')}}" alt="">
+                {{-- <img src="{{asset('homepage/images/file_10-128.png')}}" alt=""> --}}
             </div>
 
             <div class="card shadow-sm">

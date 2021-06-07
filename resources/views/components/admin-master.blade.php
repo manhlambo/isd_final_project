@@ -57,7 +57,6 @@
       @if(auth()->user()->userHasRole('Admin'))
       <x-admin-sidebar-user-link> </x-admin-sidebar-user-link>
       <x-admin-sidebar-authorization-link> </x-admin-sidebar-authorization-link>
-
       @endif
 
       <x-admin-sidebar-post-link> </x-admin-sidebar-post-link>
@@ -71,7 +70,14 @@
       <x-admin-sidebar-subject-link> </x-admin-sidebar-subject-link>
 
       <hr class="sidebar-divider">
+      
+
+      @if (auth()->user()->userHasRole('Admin'))
       <x-admin-sidebar-mark-link> </x-admin-sidebar-mark-link>
+      @elseif(auth()->user()->userHasRole('Teacher'))
+      <x-teacher-sidebar-mark-link> </x-teacher-sidebar-mark-link>
+      @endif
+      
       
 
 

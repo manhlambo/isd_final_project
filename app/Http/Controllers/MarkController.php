@@ -7,6 +7,7 @@ use App\Student;
 use App\Subject;
 use App\Teacher;
 use App\Mark;
+use App\Post;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
@@ -26,6 +27,24 @@ class MarkController extends Controller
         return view('headTeacher.student-list', [
             'students' => $students,
         ]);
+    }
+
+    public function teacherStudentsList(){
+
+        /**
+         * Nếu giáo viên ko có lớp học
+         */
+        if(!auth()->user()->teacher->classroom){
+
+            return view('404');
+        }
+
+        $students = auth()->user()->teacher->classroom->students;
+
+        return view('headTeacher.student-list', [
+            'students' => $students,
+        ]);
+
     }
 
     public function marksList(Student $student){
@@ -139,6 +158,13 @@ class MarkController extends Controller
     public function email(Student $student){
         // dd($student);
 
+        
+        if(!$student->parent_email){
+            Session::flash('email', 'Không thể gửi email vì phụ huynh học sinh chưa có địa chỉ email');
+
+            return back();
+        }
+
 
         return view("admin.email.create", [
             'student' => $student,
@@ -146,8 +172,6 @@ class MarkController extends Controller
     }
 
     public function send(Student $student, Request $req){
-
-        
 
         $data = [
             'name' => $student->name,

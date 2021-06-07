@@ -8,6 +8,8 @@
         <div class="alert alert-success">{{Session::get('updated-message')}}</div>
         @elseif(Session::has('destroy-message'))
         <div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
+        @elseif(Session::has('email'))
+        <div class="alert alert-danger">{{Session::get('email')}}</div>
         
       @endif 
 <h2>{{ $student->name }} - ID: {{ $student->id }} - Lớp: {{ isset($student->classroom) ? $student->classroom->grade.$student->classroom->name: 'N/a' }}
