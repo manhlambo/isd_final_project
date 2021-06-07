@@ -22,7 +22,7 @@ class RoleController extends Controller
     public function store(){
 
         request()->validate([
-            'name' => 'required |max:20| unique:roles,name',
+            'name' => 'required|max:20|unique:roles,name',
         ], [
             'name.required' => 'Vui lòng điền tên',
             'name.max' => 'Độ dài tên không được vượt quá 20 ký tự',
@@ -42,7 +42,7 @@ class RoleController extends Controller
     public function edit(Role $role){
         return view('admin.role.edit', [
             'role' => $role,
-            'permissions' => Permission::all(),
+            // 'permissions' => Permission::all(),
             ]);
     }
 

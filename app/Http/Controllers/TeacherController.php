@@ -49,18 +49,17 @@ class TeacherController extends Controller
         ], [
             'user_id.required' => 'Vui lòng nhập ID của người dùng',
             'user_id.exists' => 'ID không tồn tại', 
-            'user_id.unique' => 'Người dùng đã là giáo viên',
+            'user_id.unique' => $user->name.' đã là giáo viên',
             'user_id.numeric' => 'ID phải là chữ số',
             
             'phone.digits:10' => 'Số điện thoại không hợp lệ',
             'phone.unique' => 'Số điện thoại đã tồn tại'
         ]);
 
-        // Teacher::create($data);
-
         $user->teacher()->create($data);
     
         Session::flash('message', 'Giáo viên đã được thêm thành công');
+        
         return redirect()->route('teachers.index');
     }
 

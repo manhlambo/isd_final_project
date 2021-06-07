@@ -7,7 +7,7 @@
         @method("PATCH")
         <div class="row">
             <div class="col-8 offset-1">
-                <div class="row"><h2>Cập nhật role</h2></div>
+                <div class="row"><h2>Cập nhật quyền</h2></div>
 
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label"></label>   
