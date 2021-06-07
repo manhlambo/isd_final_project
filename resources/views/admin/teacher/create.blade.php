@@ -13,7 +13,6 @@
 
                 <div class="form-group row">
                     
-                    {{-- <label for="user_id" class="col-md-4 col-form-label">ID Người dùng</label> --}}
                         <input id="user_id" 
                         type="hidden" 
                         class="form-control @error('user_id') is-invalid @enderror" 

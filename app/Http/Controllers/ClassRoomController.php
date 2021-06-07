@@ -7,15 +7,13 @@ use App\ClassRoom;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
-
-
-
 class ClassRoomController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     public function index(){
 
         $classrooms = ClassRoom::all();
@@ -26,12 +24,14 @@ class ClassRoomController extends Controller
     }
 
     public function create(){
+
         $this->authorize('create', ClassRoom::class);
 
         return view('admin.classroom.create');
     }
 
     public function store(Request $request){
+
         $data = request()->validate([
             'grade' => 'required',
             'name' => [
@@ -44,7 +44,6 @@ class ClassRoomController extends Controller
                         ->whereName($request->name);
                 }),
                 ],
-
             'teacher_id' => 'nullable|numeric|exists:teachers,id|unique:class_rooms,teacher_id',
             
         ], [
@@ -67,6 +66,7 @@ class ClassRoomController extends Controller
     }
 
     public function edit(ClassRoom $classroom){
+
         $this->authorize('update', $classroom);
         
         return view('admin.classroom.edit', [
@@ -111,6 +111,7 @@ class ClassRoomController extends Controller
         $classroom->update($data);
 
         Session::flash('updated-message', 'Thông tin lớp học đã được sửa thành công');
+        
         return redirect()->route('classrooms.index');
     }
 

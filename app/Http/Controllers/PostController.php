@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class PostController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
     }
 
     public function index(){

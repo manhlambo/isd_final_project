@@ -66,26 +66,23 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="{{asset('homepage/images/element5-digital-OyCl7Y4y0Bk-unsplash.jpg')}}" alt="First slide">
+            <img class="d-block w-100" src="{{asset('homepage/images/homepage1.jpg')}}" alt="First slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
               <h5>Chào mừng đến với trường tiểu học EMS</h5>
-              {{-- <p>Some representative placeholder content for the first slide.</p> --}}
             </div>
         </div>
 
         <div class="carousel-item">
-            <img class="d-block w-100" src="{{asset('homepage/images/susan-yin-2JIvboGLeho-unsplash.jpg')}}" alt="Second slide">
+            <img class="d-block w-100" src="{{asset('homepage/images/Homepage2.jpg')}}" alt="Second slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
               <h5>Thư viện đồ sộ</h5>
-              {{-- <p>Some representative placeholder content for the second slide.</p> --}}
             </div>
         </div>
 
         <div class="carousel-item">
-          <img class="d-block w-100" src="{{asset('homepage/images/neonbrand-zFSo6bnZJTw-unsplash.jpg')}}" alt="Third slide">
+          <img class="d-block w-100" src="{{asset('homepage/images/Homepage3.jpg')}}" alt="Third slide">
             <div class="carousel-caption d-none d-md-block" style="color:black;">
                 <h5>Lớp học năng động</h5>
-                {{-- <p>Some representative placeholder content for the third slide.</p> --}}
             </div>        
         </div>         
       </div>
