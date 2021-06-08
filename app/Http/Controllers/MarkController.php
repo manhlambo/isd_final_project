@@ -5,9 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Student;
 use App\Subject;
-use App\Teacher;
 use App\Mark;
-use App\Post;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
@@ -20,8 +18,6 @@ class MarkController extends Controller
     
     public function studentsList(){
         
-        // $students = auth()->user()->teacher->classroom->students;
-
         $students = Student::all();
 
         return view('headTeacher.student-list', [
@@ -92,7 +88,7 @@ class MarkController extends Controller
 
         $subject->marks()->create($data);
 
-        Session::flash('message', 'Điểm đã được thêm thành công');
+        Session::flash('create', 'Điểm được thêm thành công');
 
         return redirect()->route('marks.list', $student);
 
@@ -127,7 +123,7 @@ class MarkController extends Controller
 
     $mark->update($data);
 
-    Session::flash('updated-message', 'Điểm đã được cập nhập thành công');
+    Session::flash('update', 'Điểm được cập nhập thành công');
 
     return redirect()->route('marks.list', $student);
     }
@@ -140,7 +136,7 @@ class MarkController extends Controller
 
         $mark->delete();
 
-        Session::flash('destroy-message', 'Điểm đã được xóa thành công');
+        Session::flash('destroy', 'Điểm đã được xóa thành công');
 
         return back();
 
@@ -156,11 +152,9 @@ class MarkController extends Controller
     }
 
     public function email(Student $student){
-        // dd($student);
 
-        
         if(!$student->parent_email){
-            Session::flash('email', 'Không thể gửi email vì phụ huynh học sinh chưa có địa chỉ email');
+            Session::flash('no-email', 'Không thể gửi email vì phụ huynh học sinh chưa có địa chỉ email');
 
             return back();
         }
@@ -193,7 +187,7 @@ class MarkController extends Controller
 
         });
 
-        Session::flash('success', 'Gửi email thành công');
+        Session::flash('email-success', 'Gửi email thành công');
         
         return back();
     }

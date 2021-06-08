@@ -43,7 +43,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        Session::flash('message', 'Cập nhật thông tin người dùng thành công.');
+        Session::flash('update', 'Cập nhật thông tin thành công.');
 
         return back();
     }
@@ -65,7 +65,7 @@ class UserController extends Controller
         $user = User::findOrFail($request->user_id);
         $user->delete();
 
-        Session::flash('delete-user', 'Người dùng đã được xóa khỏi hệ thống thành công');
+        Session::flash('destroy', 'Người dùng đã được xóa khỏi hệ thống thành công');
 
         return back();
 

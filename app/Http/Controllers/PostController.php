@@ -40,7 +40,7 @@ class PostController extends Controller
 
         auth()->user()->posts()->create($data);
 
-        Session::flash('post-created-message', 'Thông báo đã được thêm thành công');
+        Session::flash('create', 'Thông báo được thêm thành công');
         return redirect()->route('posts.index');
     }
 
@@ -48,9 +48,11 @@ class PostController extends Controller
 
         $post = Post::findOrFail($request->post_id);
 
+        $this->authorize('delete', $post);
+
         $post->delete();
 
-        Session::flash('message', 'Thông báo đã được xóa thành công');
+        Session::flash('destroy', 'Thông báo đã được xóa thành công');
 
         return back();
     }
@@ -74,7 +76,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        Session::flash('post-updated-message', 'Thông báo đã được cập nhật thành công');
+        Session::flash('update', 'Thông báo được cập nhật thành công');
         return redirect()->route('posts.index');
     }
     

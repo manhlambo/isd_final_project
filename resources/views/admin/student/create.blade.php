@@ -10,6 +10,12 @@
                 <div class="col-8 offset-2">
     
                     <div class="row"><h1>Thêm học sinh</h1></div>
+                    <div style="display:flex; justify-content: space-between;">
+                        <h4>Lớp: {{ $classroom->grade.$classroom->name }}</h4>
+                        <span>
+                            <h4>Giáo viên: {{ $classroom->teacher->user->name ?? 'Chưa có giáo viên chủ nhiệm'}}</h4>
+                        </span>
+                    </div>
     
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label">Họ và tên</label>

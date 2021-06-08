@@ -1,18 +1,11 @@
 <x-admin-master>
-    @section('content')
+@section('content')
     
-      @if(Session::has('message'))
-        <div class="alert alert-success">{{Session::get('message')}}</div>
-        
-        @elseif(Session::has('updated-message'))
-        <div class="alert alert-success">{{Session::get('updated-message')}}</div>
-        @elseif(Session::has('destroy-message'))
-        <div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
-        
-      @endif 
+<x-admin-alert/>
 
-          <!-- Modal -->
-    <div class="modal modal-danger fade" id="deleteClass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteClass" tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,9 +26,7 @@
                   Hãy kiểm tra kỹ thông tin lớp học trước khi xóa.
                   </b>
                 </p>
-
                 <input type="hidden" name='classroom_id' id='classroom_id' value=''>
-
               </div>
 
               <div class="modal-footer">
@@ -52,9 +43,7 @@
                 </button>
                 
               </div>
-
          </form>
-
         </div>
       </div>
     </div>
@@ -80,12 +69,21 @@
           <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
             <thead class='thead-light'>
               <tr>
+                @can('create', App\ClassRoom::class)
                 <th>ID</th>
                 <th>Khối</th>
                 <th>Tên lớp</th>
                 <th>Giáo viên chủ nhiệm</th>
                 <th>Thêm học sinh</th>
                 <th>Xóa</th>
+                @endcan
+
+                @cannot('create', App\ClassRoom::class)
+                <th>ID</th>
+                <th>Khối</th>
+                <th>Tên lớp</th>
+                <th>Giáo viên chủ nhiệm</th>
+                @endcannot
               </tr>
             </thead>
 
@@ -104,20 +102,21 @@
                 <td>{{ $classroom->grade }}</td>
                 <td>{{ $classroom->name }}</td>
                 <td>{{ isset($classroom->teacher) ? $classroom->teacher->user->name: 'Chưa có giáo viên chủ nhiệm' }}</td>
-                <td>
-                  @can('create', App\ClassRoom::class)
-                    <a href="{{ route('student.create', $classroom) }}" class = "btn btn-success btn-circle btn-sm">
-                      <i class="fas fa-plus-circle"></i>
-                    </a>
-                  @endcan
-                </td>
-                <td>
-                  @can('create', App\ClassRoom::class)
-                  <button class="btn btn-danger btn-circle btn-sm" data-classroomid={{ $classroom->id }} data-toggle="modal" data-target="#deleteClass">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                  @endcan
-                </td>
+
+                @can('update', $classroom)
+                    <td>
+                      <a href="{{ route('student.create', $classroom) }}" class = "btn btn-success btn-circle btn-sm">
+                        <i class="fas fa-plus-circle"></i>
+                      </a>
+                  </td>
+                  
+                  <td>
+                    <button class="btn btn-danger btn-circle btn-sm" data-classroomid={{ $classroom->id }} data-toggle="modal" data-target="#deleteClass">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                @endcan
+
               </tr>
               @endforeach
             </tbody>

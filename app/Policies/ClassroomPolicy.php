@@ -65,7 +65,7 @@ class ClassroomPolicy
      */
     public function delete(User $user, ClassRoom $classRoom)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**

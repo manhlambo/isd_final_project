@@ -1,19 +1,11 @@
 <x-admin-master>
 @section('content')
 
-@if(Session::has('message'))
-    <div class="alert alert-danger">{{Session::get('message')}}</div>
-    
-    @elseif(Session::has('post-created-message'))
-    <div class="alert alert-success">{{Session::get('post-created-message')}}</div>
-    @elseif(Session::has('post-updated-message'))
-    <div class="alert alert-success">{{Session::get('post-updated-message')}}</div>
-    
-
-@endif
+<x-admin-alert/>
 
     <!-- Modal -->
-    <div class="modal modal-danger fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal modal-danger fade" id="deletePost" tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -34,9 +26,7 @@
                   Hãy kiểm tra kỹ thông báo trước khi xóa.
                   </b>
                 </p>
-
                 <input type="hidden" name='post_id' id='post_id' value=''>
-
               </div>
 
               <div class="modal-footer">
@@ -53,9 +43,7 @@
                 </button>
                 
               </div>
-
          </form>
-
         </div>
       </div>
     </div>
@@ -66,7 +54,6 @@
         <h6 class="m-0 font-weight-bold text-primary">Thông báo</h6>
 
         @can('create', App\Post::class)
-
             <a href="{{route('posts.create')}}" class="btn btn-primary btn-icon-split">
               <span class="icon text-white-50">
                 <i class="fas fa-plus-circle"></i>
@@ -81,15 +68,26 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
+                @can('create', App\Post::class)
                 <th>ID</th>
                 <th>Người Đăng</th>
                 <th>Tiêu đề</th>
                 <th>Nội dung</th>
                 <th>Ngày tạo</th>
                 <th>Ngày sửa đổi</th>
-                <th> Xóa</th>
-              
+                <th>Xóa</th>
+                @endcan
+
+                @cannot('create', App\Post::class)
+                <th>ID</th>
+                <th>Người Đăng</th>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Ngày tạo</th>
+                <th>Ngày sửa đổi</th>
+                @endcannot
               </tr>
+                
             </thead>
 
             <tbody>
@@ -109,13 +107,15 @@
                 <td>{{Str::limit($post->content, '10', '...')}}</td>
                 <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
                 <td>{{date('d-m-Y', strtotime($post->updated_at))}}</td>
+
+                @can('delete', $post)
                 <td>
-                  @can('delete', $post)
-                  <button class="btn btn-danger btn-circle btn-sm" data-postid={{ $post->id }} data-toggle="modal" data-target="#deletePost">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                  @endcan
+                    <button class="btn btn-danger btn-circle btn-sm" data-postid={{ $post->id }} data-toggle="modal" data-target="#deletePost">
+                      <i class="fas fa-trash"></i>
+                    </button>
                 </td>
+                @endcan
+                
               </tr>
               @endforeach
             </tbody>

@@ -64,7 +64,7 @@ class StudentController extends Controller
 
         $classroom->students()->create($data);
 
-        Session::flash('message', 'Thông tin học sinh đã được tạo thành công');
+        Session::flash('create', 'Thông tin học sinh đã được tạo thành công');
 
         return redirect()->route('students.index');
     }
@@ -103,7 +103,7 @@ class StudentController extends Controller
 
         $student->update($data);
         
-        Session::flash('updated-message', 'Thông tin học sinh đã được cập nhật thành công');
+        Session::flash('update', 'Thông tin học sinh đã được cập nhật thành công');
 
         return redirect()->route('students.index');
     }
@@ -112,9 +112,11 @@ class StudentController extends Controller
 
         $student = Student::findOrFail($request->student_id);
 
+        $this->authorize('delete', $student);
+
         $student->delete();
 
-        Session::flash('destroy-message', 'Học sinh đã được xóa thành công');
+        Session::flash('destroy', 'Học sinh đã được xóa thành công');
 
         return back();
     }
@@ -122,7 +124,6 @@ class StudentController extends Controller
     /**
      * Subjects
      */
-
 
     public function attach(Student $student){
         $student->subjects()->attach(request('subject'));
@@ -136,6 +137,9 @@ class StudentController extends Controller
         return back();
     }
 
+    /**
+     * export excel
+     */
     public function exportIntoExcel() {
         return Excel::download(new StudentsExport, "students.xlsx"); 
     } 

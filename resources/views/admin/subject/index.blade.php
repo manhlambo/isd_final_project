@@ -1,18 +1,11 @@
 <x-admin-master>
-    @section('content')
+@section('content')
 
-    @if(Session::has('message'))
-    <div class="alert alert-success">{{Session::get('message')}}</div>
-    
-    @elseif(Session::has('updated-message'))
-    <div class="alert alert-success">{{Session::get('updated-message')}}</div>
-    @elseif(Session::has('destroy-message'))
-    <div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
-    
-  @endif 
+<x-admin-alert/>
     
     <!-- Modal -->
-    <div class="modal modal-danger fade" id="deleteSubject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal modal-danger fade" id="deleteSubject" tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -31,12 +24,9 @@
                     <br>
                     <br> 
                     Hãy đảm bảo bạn đã sao lưu toàn bộ điểm và kiểm tra kỹ thông tin môn học.
-
                   </b>
                 </p>
-
                 <input type="hidden" name='subject_id' id='sub_id' value=''>
-
               </div>
 
               <div class="modal-footer">
@@ -53,9 +43,7 @@
                 </button>
 
               </div>
-
          </form>
-
         </div>
       </div>
     </div>
@@ -120,10 +108,18 @@
                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                   <thead class='thead-light'>
                     <tr>
+                      @can('create', App\Subject::class)
                       <th>ID</th>
                       <th>Tên</th>
                       <th>Giảng viên</th>
                       <th>Xóa</th>
+                      @endcan
+
+                      @cannot('create', App\Subject::class)
+                      <th>ID</th>
+                      <th>Tên</th>
+                      <th>Giảng viên</th>
+                      @endcannot
                     </tr>
                   </thead>
 
@@ -141,14 +137,15 @@
                           @endcannot
                         </td>
                         <td>{{ $sub->assign }}</td>
-                        <td>
-                            @can('create', App\Subject::class)
-                            <button class="btn btn-danger btn-circle btn-sm" data-subid={{ $sub->id }} data-toggle="modal" data-target="#deleteSubject">
-                              <i class="fas fa-trash"></i>
-                            </button>                              
-                            @endcan
 
+                        @can('delete', $sub)
+                        <td>
+                          <button class="btn btn-danger btn-circle btn-sm" data-subid={{ $sub->id }} data-toggle="modal" data-target="#deleteSubject">
+                            <i class="fas fa-trash"></i>
+                          </button>                              
                         </td>
+                        @endcan
+
                       </tr>
                       @endforeach
                   </tbody>
@@ -176,6 +173,7 @@
     })
        
     </script> 
+
     @endsection
 
     </x-admin-master>

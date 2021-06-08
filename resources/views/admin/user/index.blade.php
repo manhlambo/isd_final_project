@@ -1,12 +1,7 @@
 <x-admin-master>
 @section('content')
 
-@if(Session::has('delete-user'))
-    <div class="alert alert-danger">{{Session::get('delete-user')}}</div>
-    @elseif(Session::has('message'))
-        <div class="alert alert-success">{{Session::get('message')}}</div>
-
-@endif
+<x-admin-alert/>
 
     <!-- Modal -->
     <div class="modal modal-danger fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,20 +1,11 @@
 <x-admin-master>
-
-
 @section('content')
 
-@if(Session::has('message'))
-        <div class="alert alert-success">{{Session::get('message')}}</div>
-        
-        @elseif(Session::has('updated'))
-        <div class="alert alert-success">{{Session::get('updated')}}</div>
-        @elseif(Session::has('destroy'))
-        <div class="alert alert-danger">{{Session::get('destroy')}}</div>
-        
-@endif 
+<x-admin-alert/>
 
     <!-- Modal -->
-    <div class="modal modal-danger fade" id="deleteRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal modal-danger fade" id="deleteRole" tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

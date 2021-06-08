@@ -58,17 +58,19 @@ class TeacherController extends Controller
 
         $user->teacher()->create($data);
     
-        Session::flash('message', 'Giáo viên đã được thêm thành công');
+        Session::flash('create', 'Giáo viên được thêm thành công');
         
         return redirect()->route('teachers.index');
     }
 
     public function edit(Teacher $teacher){
+        
+        $this->authorize('update', $teacher);
+
         return view('admin.teacher.edit', ['teacher' => $teacher]);
     }
 
     public function update(Teacher $teacher){
-        $this->authorize('update', $teacher);
 
         $data = request()->validate([
             'dob' => 'nullable|date',
@@ -85,17 +87,19 @@ class TeacherController extends Controller
 
         $teacher->update($data);
 
-        Session::flash('updated-message', 'Thông tin giáo viên đã được sửa thành công');
+        Session::flash('update', 'Thông tin giáo viên được sửa thành công');
         return redirect()->route('teachers.index');
     }
 
     public function destroy(Request $request){
 
         $teacher = Teacher::findOrFail($request->teacher_id);
+
+        $this->authorize('delete', $teacher);
         
         $teacher->delete();
 
-        Session::flash('destroy-message', 'Giáo viên đã được xóa thành công');
+        Session::flash('destroy', 'Giáo viên đã được xóa thành công');
         return back();
     }
 

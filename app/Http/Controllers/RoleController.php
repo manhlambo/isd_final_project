@@ -34,7 +34,7 @@ class RoleController extends Controller
             'slug' => Str::of(Str::lower(request('name')))->slug('_'),
         ]);
 
-        Session::flash('message', 'Vai trò đã được tạo thành công');
+        Session::flash('create', 'Vai trò được tạo thành công');
 
         return back();
     }
@@ -61,7 +61,7 @@ class RoleController extends Controller
 
         $role->update();
 
-        Session::flash('updated', 'Thông tin vai trò đã được cập nhật thành công');
+        Session::flash('update', 'Thông tin vai trò đã được cập nhật thành công');
 
         return redirect()->route('roles.index');
         

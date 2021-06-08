@@ -65,7 +65,7 @@ class SubjectPolicy
      */
     public function delete(User $user, Subject $subject)
     {
-        //
+        return $user->userHasRole('Admin');
     }
 
     /**

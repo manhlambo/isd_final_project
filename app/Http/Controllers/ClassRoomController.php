@@ -59,7 +59,7 @@ class ClassRoomController extends Controller
 
         ClassRoom::create($data);
 
-        Session::flash('message', 'Lớp học đã được thêm thành công');
+        Session::flash('create', 'Lớp học được thêm thành công');
 
         return redirect()->route('classrooms.index');
 
@@ -110,7 +110,7 @@ class ClassRoomController extends Controller
 
         $classroom->update($data);
 
-        Session::flash('updated-message', 'Thông tin lớp học đã được sửa thành công');
+        Session::flash('update', 'Thông tin lớp học được sửa thành công');
         
         return redirect()->route('classrooms.index');
     }
@@ -119,9 +119,11 @@ class ClassRoomController extends Controller
 
         $classroom = ClassRoom::findOrFail($request->classroom_id);
 
+        $this->authorize('delete', $classroom);
+
         $classroom->delete();
 
-        Session::flash('destroy-message', 'Lớp học đã được xóa thành công');
+        Session::flash('destroy', 'Lớp học đã được xóa thành công');
         
         return back();
     }

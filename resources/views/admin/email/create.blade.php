@@ -1,20 +1,8 @@
 <x-admin-master>
 @section('content')
 
-@if(Session::has('success'))
-<div class="alert alert-success">{{Session::get('success')}}</div>
+<x-admin-alert/>
 
-@elseif(Session::has('updated-message'))
-<div class="alert alert-success">{{Session::get('updated-message')}}</div>
-@elseif(Session::has('destroy-message'))
-<div class="alert alert-danger">{{Session::get('destroy-message')}}</div>
-
-@endif 
-
-<!DOCTYPE html>
-<html lang="en">
-<body>
-    
     <form action="" method="post" role="form">
     {{ csrf_field() }}
         <h1 style='text-align: center;' color="black" >Thông báo kết quả học tập</h1>
@@ -109,11 +97,6 @@
         </div>
 
     </form>
-
-
-</body>
-
-
 
 @endsection
 </x-admin-master>
