@@ -23,9 +23,14 @@
             <!-- <img src="{{asset('homepage/images/file_10-128.png')}}" alt="excel" class="attachments" style="height: 64px; width: 64px;">  -->
             <!-- <a href="">file.xls</a>  -->
         </div>
+
     </div>
     @endforeach
-  
+
+    <div class="d-flex justify-content-center">
+      {{ $posts->links() }}
+    </div>
+    
   @endsection
   </x-home-master>
   
