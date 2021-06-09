@@ -1,5 +1,6 @@
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" 
+<li class="{{ request()->segment(1) == 'teacherStudentsList' ? 'nav-item active' : 'nav-item' }}">
+
+    <a class="nav-link collapsed" href="{{ route('teacherStudents.list') }}" data-toggle="collapse" 
     data-target="#collapeMark_studentTeacher" 
     aria-expanded="true" 
     aria-controls="collapeMark_studentTeacher">
