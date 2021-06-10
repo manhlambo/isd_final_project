@@ -9,25 +9,25 @@
 
 ## Installation
 1. Open Terminal and do a clone of the project and go to the project directory with the following command: 
-- git clone https://github.com/manhlambo/isd_final_project.git.
+- git clone https://github.com/manhlambo/isd_final_project.git
 - cd isd_final_project
 
 2. Run composer and npm to install the necessary packages in the project 
-- composer install.
-- npm install.
+- composer install
+- npm install
 
 3. Create database and config database 
 - Go to phpmyadmin to create a new database: 
-    - laravel.
+    - laravel
 - Execute the following command to copy the env file: 
-    - cp .env.example .env.
+    - cp .env.example .env
 - Update your env file as follows: 
-      DB_CONNECTION=mysql          
-      DB_HOST=127.0.0.1            
-      DB_PORT=3306                 
-      DB_DATABASE=laravel       
-      DB_USERNAME=root             
-      DB_PASSWORD=  
+DB_CONNECTION=mysql          
+DB_HOST=127.0.0.1            
+DB_PORT=3306                 
+DB_DATABASE=laravel       
+DB_USERNAME=root             
+DB_PASSWORD=  
 
 4. Generate key for the project 
 - php artisan key:generate
@@ -45,13 +45,14 @@
 - php artisan serve
 
 9. Final steps:
-- Register user
+- Register user in the 'Đăng ký thành viên mới' page
 - Go to phpmyadmin, insert admin role in roles table
    - name: Admin
    - slug: admin
-- Attach admin role to user. Go to role_user table:
+- Attach admin role to user. Go to role_user table in phpmyadmin:
    - user_id: 1-user
    - role_id: 1-Admin 
+   
 - Press F5 to see the change in the website
 - Add teacher role
    - Go to 'Quản lý phân quyền'
