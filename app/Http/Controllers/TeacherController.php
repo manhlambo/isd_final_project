@@ -52,7 +52,7 @@ class TeacherController extends Controller
             'user_id.unique' => $user->name.' đã là giáo viên',
             'user_id.numeric' => 'ID phải là chữ số',
             
-            'phone.digits:10' => 'Số điện thoại không hợp lệ',
+            'phone.digits' => 'Số điện thoại hợp lệ bao gồm 10 số',
             'phone.unique' => 'Số điện thoại đã tồn tại'
         ]);
 

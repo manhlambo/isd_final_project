@@ -7,55 +7,57 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## Installation
+1. Open Terminal and do a clone of the project and go to the project directory with the following command: 
+- git clone https://github.com/manhlambo/isd_final_project.git.
+- cd isd_final_project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+2. Run composer and npm to install the necessary packages in the project 
+- composer install.
+- npm install.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+3. Create database and config database 
+- Go to phpmyadmin to create a new database: 
+    - laravel.
+- Execute the following command to copy the env file: 
+    - cp .env.example .env.
+- Update your env file as follows: 
+      DB_CONNECTION=mysql          
+      DB_HOST=127.0.0.1            
+      DB_PORT=3306                 
+      DB_DATABASE=laravel       
+      DB_USERNAME=root             
+      DB_PASSWORD=  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+4. Generate key for the project 
+- php artisan key:generate
 
-## Learning Laravel
+5. Create tables and sample data for the database 
+- php artisan migrate
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+6. Build styles and scripts 
+- npm run dev
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+7. Install laravel excel
+- composer require maatwebsite/excel
 
-## Laravel Sponsors
+8. Serve the project: 
+- php artisan serve
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+9. Final steps:
+- Register user
+- Go to phpmyadmin, insert admin role in roles table
+   - name: Admin
+   - slug: admin
+- Attach admin role to user. Go to role_user table:
+   - user_id: 1-user
+   - role_id: 1-Admin 
+- Press F5 to see the change in the website
+- Add teacher role
+   - Go to 'Quản lý phân quyền'
+   - Insert 'Teacher' and press 'Tạo'
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

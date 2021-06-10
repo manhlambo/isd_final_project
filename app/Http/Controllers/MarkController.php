@@ -111,12 +111,12 @@ class MarkController extends Controller
         'midterm' => 'nullable|numeric|between:0,10',
         'final' => 'nullable|numeric|between:0,10',
     ], [
-        'oral.numeric' => 'Điểm kiển tra miệng phải là số, trong khoảng 0 đến 10',
-        'oral.between' => 'Điểm kiển tra miệng phải là số, trong khoảng 0 đến 10',
-        'midterm.numeric' => 'Điểm kiển tra giữa kỳ phải là số, trong khoảng 0 đến 10',
-        'midterm.between' => 'Điểm kiển tra giữa kỳ phải là số, trong khoảng 0 đến 10',
-        'final.numeric' => 'Điểm kiển tra cuối kỳ phải là số, trong khoảng 0 đến 10',
-        'final.between' => 'Điểm kiển tra cuối kỳ phải là số, trong khoảng 0 đến 10',
+        'oral.numeric' => 'Điểm kiểm tra miệng phải là số, trong khoảng 0 đến 10',
+        'oral.between' => 'Điểm kiểm tra miệng phải là số, trong khoảng 0 đến 10',
+        'midterm.numeric' => 'Điểm kiểm tra giữa kỳ phải là số, trong khoảng 0 đến 10',
+        'midterm.between' => 'Điểm kiểm tra giữa kỳ phải là số, trong khoảng 0 đến 10',
+        'final.numeric' => 'Điểm kiểm tra cuối kỳ phải là số, trong khoảng 0 đến 10',
+        'final.between' => 'Điểm kiểm tra cuối kỳ phải là số, trong khoảng 0 đến 10',
     ]);
 
     $student = request('student_id');
